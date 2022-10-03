@@ -1,9 +1,9 @@
-import {RequestData} from '@ant-design/pro-components'
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import {ToastError} from './ToastUtil'
 import MyPageDTO from "@/model/dto/MyPageDTO";
 import LocalStorageKey from "@/model/constant/LocalStorageKey";
 import {SignOut} from "./UserUtil";
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {RequestData} from '@ant-design/pro-components';
 
 export const TIMEOUT_MSG = '请求超时，请重试'
 export const BASE_ERROR_MSG = "请求错误："
@@ -61,7 +61,7 @@ $http.interceptors.response.use(
         }
 
         const res = response.data
-        if (res.code !== 200 || !res.success) {
+        if (res.code !== 200 || !res.successFlag) {
             if (res.code === 100111) { // 这个代码需要跳转到：登录页面
                 SignOut()
                 ToastError(res.msg, 5)
@@ -97,7 +97,7 @@ $http.interceptors.response.use(
 
 export interface ApiResultVO<T = string> {
     code: number
-    success: boolean
+    successFlag: boolean
     msg: string
     data: T
 }
