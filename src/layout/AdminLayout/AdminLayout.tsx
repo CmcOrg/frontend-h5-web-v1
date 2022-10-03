@@ -95,7 +95,7 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                         item.icon = <MyIcon icon={item.icon as string}/>
                         item.hideInMenu = !item.showFlag
                     })
-                    return ListToTree(userSelfMenuListTemp);
+                    return ListToTree(userSelfMenuListTemp, true, '0');
                 },
             }}
             fixSiderbar={true}
