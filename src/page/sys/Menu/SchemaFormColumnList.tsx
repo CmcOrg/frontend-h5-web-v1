@@ -1,7 +1,7 @@
 import {SysRolePage} from "@/api/admin/SysRoleController";
 import {RouterMapKeyList} from "@/router/RouterMap";
 import {GetDictList, GetDictTreeList, YesNoDict} from "@/util/DictUtil";
-import {ProFormColumnsType} from "@ant-design/pro-form/lib/components/SchemaForm/typing";
+import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysMenuInsertOrUpdateDTO, SysMenuPage} from "@/api/admin/SysMenuController";
 
 export const InitForm: SysMenuInsertOrUpdateDTO = {} as SysMenuInsertOrUpdateDTO

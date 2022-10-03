@@ -1,7 +1,7 @@
 import {SysMenuPage} from "@/api/admin/SysMenuController";
 import {GetDictTreeList, YesNoDict} from "@/util/DictUtil";
 import {TreeSelect} from "antd";
-import {ProFormColumnsType} from "@ant-design/pro-form/lib/components/SchemaForm/typing";
+import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysRoleInsertOrUpdateDTO} from "@/api/admin/SysRoleController";
 
 export const InitForm: SysRoleInsertOrUpdateDTO = {} as SysRoleInsertOrUpdateDTO

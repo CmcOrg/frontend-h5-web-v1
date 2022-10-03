@@ -1,5 +1,5 @@
 import {YesNoDict} from "@/util/DictUtil";
-import {ProFormColumnsType} from "@ant-design/pro-form/lib/components/SchemaForm/typing";
+import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysParamInsertOrUpdateDTO} from "@/api/admin/SysParamController";
 
 export const InitForm: SysParamInsertOrUpdateDTO = {} as SysParamInsertOrUpdateDTO
