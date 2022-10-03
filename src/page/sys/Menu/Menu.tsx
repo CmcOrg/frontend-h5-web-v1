@@ -1,4 +1,7 @@
 import {useRef, useState} from "react";
+import {ActionType, BetaSchemaForm, ColumnsState, ModalForm, ProFormDigit, ProTable} from "@ant-design/pro-components";
+import {Button, Dropdown, Form, Menu, Space} from "antd";
+import {ColumnHeightOutlined, EllipsisOutlined, PlusOutlined, VerticalAlignMiddleOutlined} from "@ant-design/icons/lib";
 import {
     SysMenuAddOrderNo,
     SysMenuDeleteByIdSet,
@@ -9,14 +12,11 @@ import {
     SysMenuPageDTO,
     SysMenuTree
 } from "@/api/admin/SysMenuController";
+import TableColumnList from "./TableColumnList";
+import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
+import SchemaFormColumnList, {InitForm} from "./SchemaFormColumnList";
 import {GetIdListForHasChildrenNode} from "@/util/TreeUtil";
 import CommonConstant from "@/model/constant/CommonConstant";
-import {Button, Dropdown, Form, Menu, Space} from "antd";
-import {ActionType, BetaSchemaForm, ColumnsState, ModalForm, ProFormDigit, ProTable} from "@ant-design/pro-components";
-import TableColumnList from "@/page/sys/Menu/TableColumnList";
-import {ColumnHeightOutlined, EllipsisOutlined, PlusOutlined, VerticalAlignMiddleOutlined} from "@ant-design/icons/lib";
-import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
-import SchemaFormColumnList, {InitForm} from "@/page/sys/Menu/SchemaFormColumnList";
 
 // 菜单管理
 export default function () {
