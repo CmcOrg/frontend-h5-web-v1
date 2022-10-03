@@ -1,0 +1,34 @@
+{
+  "name": "frontend-h5-v1",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-components": "^2.3.13",
+    "@reduxjs/toolkit": "^1.8.5",
+    "antd": "^4.23.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
+    "crypto-js": "^4.1.1",
+    "jsencrypt": "^3.2.1",
+    "react-router-dom": "^6.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "axios": "^0.27.2",
+    "less": "^4.1.3",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.4"
+  }
+}
