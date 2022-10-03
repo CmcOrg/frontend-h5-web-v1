@@ -22,14 +22,14 @@ const consoleOldError = console.error
 
 console.error = (message?: any, ...optionalParams: any[]) => {
     if (message === 'Warning: routes 将会废弃，为了保证兼容请使用 children 作为子节点定义方式') {
-        return // TODO：等 antd pro 官方修复，然后删除
+        return // TODO：等 antd pro官方修复，然后删除
     }
     consoleOldError(message, ...optionalParams)
 }
 // 自定义 console.error ↑
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    // <React.StrictMode> // TODO：暂时会报错，等官方修复
+    // <React.StrictMode> // TODO：暂时会报错，等 antd pro官方修复
     <Provider store={store}>
         <ConfigProvider locale={zhCN}>
             <App/>
