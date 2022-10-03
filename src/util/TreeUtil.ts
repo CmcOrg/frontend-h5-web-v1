@@ -55,7 +55,7 @@ interface IListToTree {
 export function ListToTree<T extends IListToTree>(
     list: T[],
     childrenFlag: boolean = true,
-    pid: string | number = 0,
+    pid: string | number = '0',
     childrenName: string = 'children'
 ) {
     const resList: T[] = [] // 本方法返回值
