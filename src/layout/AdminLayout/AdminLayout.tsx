@@ -8,7 +8,6 @@ import {
 } from "@ant-design/pro-components";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {Outlet} from "react-router-dom";
-import {WarningFilled} from "@ant-design/icons";
 import {RouterMapKeyList} from "@/router/RouterMap";
 import {InDev} from "@/util/CommonUtil";
 import {getAppNav} from "@/App";
@@ -104,7 +103,7 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                         item.icon = <MyIcon icon={item.icon as string}/>
                         item.hideInMenu = !item.showFlag
                     })
-                    return ListToTree(userSelfMenuListTemp, true, 0);
+                    return ListToTree(userSelfMenuListTemp);
                 },
             }}
             fixSiderbar={true}
@@ -128,9 +127,6 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                 >
                     <>
                         {defaultDom}
-                        {(item.router && !RouterMapKeyList.includes(item.router)) &&
-                        <WarningFilled className={"warning2 m-l-4"}/>
-                        }
                     </>
                 </a>
             )}

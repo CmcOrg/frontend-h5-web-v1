@@ -8,7 +8,7 @@ interface ISignLayout extends PropsWithChildren {
 }
 
 export function GetCopyright() {
-    return `2021-${new Date().getFullYear()} Admin Project. All rights reserved.`
+    return `2021-${new Date().getFullYear()} Cmc Org. All Rights Reserved.`
 }
 
 export function GetBeiAnHref() {

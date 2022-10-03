@@ -21,30 +21,22 @@ moment.locale('zh-cn');
 const consoleOldError = console.error
 
 console.error = (message?: any, ...optionalParams: any[]) => {
-    if (optionalParams && optionalParams.length) {
-        if (optionalParams[0] === 'findDOMNode') { // 过滤 findDOMNode警告，TODO：等 antd 官方修复，然后删除
-            return
-        }
-    }
-    if (message === 'Warning: [antd: Modal] `visible` will be removed in next major version, please use `open` instead.') { // 过滤过期警告，TODO：等依赖升级，然后删除
-        return;
-    }
-    if (typeof message === 'string' && message.startsWith("Warning: Tree missing follow keys:")) {
-        return; // TODO：等 antd pro 官方修复，然后删除
+    if (message === 'Warning: routes 将会废弃，为了保证兼容请使用 children 作为子节点定义方式') {
+        return // TODO：等 antd pro 官方修复，然后删除
     }
     consoleOldError(message, ...optionalParams)
 }
 // 自定义 console.error ↑
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <ConfigProvider locale={zhCN}>
-                <App/>
-                <div title={"返回顶部"}>
-                    <BackTop/>
-                </div>
-            </ConfigProvider>
-        </Provider>
-    </React.StrictMode>
+    // <React.StrictMode> // TODO：暂时会报错，等官方修复
+    <Provider store={store}>
+        <ConfigProvider locale={zhCN}>
+            <App/>
+            <div title={"返回顶部"}>
+                <BackTop/>
+            </div>
+        </ConfigProvider>
+    </Provider>
+    // </React.StrictMode>
 )
