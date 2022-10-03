@@ -36,16 +36,6 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
         },
 
         {
-            title: '前端加密之后的密码',
-            dataIndex: 'password',
-        },
-
-        {
-            title: '前端加密之后的原始密码',
-            dataIndex: 'origPassword',
-        },
-
-        {
             title: '昵称',
             dataIndex: 'nickname',
             formItemProps: {
@@ -77,7 +67,7 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
         },
 
         {
-            title: '角色 idSet',
+            title: '绑定角色',
             dataIndex: 'roleIdSet',
         },
 
