@@ -11,16 +11,16 @@ import PathConstant from "@/model/constant/PathConstant";
 /**
  * 处理表单
  */
-export function SignInFormHandler(form: ISignInForm) {
+export async function SignInFormHandler(form: ISignInForm) {
 
     const password = PasswordRSAEncrypt(form.password) // 密码加密
 
     if (/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(form.account)) { // 如果是：邮箱
-        SignEmailSignInPassword({email: form.account, password}).then(res => {
+        await SignEmailSignInPassword({email: form.account, password}).then(res => {
             SignInSuccess(res)
         })
-    } else {
-        SignSignInNameSignInPassword({signInName: form.account, password}).then(res => {
+    } else { // 否则是：登录名
+        await SignSignInNameSignInPassword({signInName: form.account, password}).then(res => {
             SignInSuccess(res)
         });
     }
