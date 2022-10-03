@@ -4,12 +4,12 @@ import {Button, Form, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons/lib";
 import {
     SysUserDeleteByIdSet,
-    SysUserDO,
     SysUserInfoById,
     SysUserInsertOrUpdate,
     SysUserInsertOrUpdateDTO,
     SysUserPage,
-    SysUserPageDTO
+    SysUserPageDTO,
+    SysUserPageVO
 } from "@/api/admin/SysUserController";
 import TableColumnList from "./TableColumnList";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
@@ -33,7 +33,7 @@ export default function () {
 
     return (
         <>
-            <ProTable<SysUserDO, SysUserPageDTO>
+            <ProTable<SysUserPageVO, SysUserPageDTO>
                 scroll={{y: CommonConstant.TABLE_HEIGHT}}
                 actionRef={actionRef}
                 rowKey={"id"}

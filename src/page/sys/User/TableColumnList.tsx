@@ -16,13 +16,19 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
 
     {title: '头像uri', dataIndex: 'avatarUri', ellipsis: true,},
 
-    {title: '邮箱，备注：会脱敏', dataIndex: 'email', ellipsis: true,},
+    {title: '邮箱', dataIndex: 'email', ellipsis: true,},
 
-    {title: '登录名，会脱敏', dataIndex: 'signInName', ellipsis: true,},
+    {title: '登录名', dataIndex: 'signInName', ellipsis: true,},
 
     {
         title: '正常/冻结',
         dataIndex: 'enableFlag',
+        valueEnum: YesNoDict
+    },
+
+    {
+        title: '是否有密码',
+        dataIndex: 'passwordFlag',
         valueEnum: YesNoDict
     },
 
@@ -41,14 +47,6 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
     },
 
     {
-        title: '是否有密码',
-        dataIndex: 'passwordFlag',
-        valueEnum: YesNoDict
-    },
-
-    {title: '角色 idSet', dataIndex: 'roleIdSet', ellipsis: true,},
-
-    {
         title: '操作',
         dataIndex: 'option',
         valueType: 'option',
@@ -63,7 +61,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()
                     })
-                }, undefined, `确定删除【${entity.nickname}】吗？`)
+                }, undefined, `确定删除【${entity.name}】吗？`)
             }}>删除</a>,
         ],
     },

@@ -89,9 +89,9 @@ export interface SysUserPageVO {
     email?: string // 邮箱，备注：会脱敏
     signInName?: string // 登录名，会脱敏
     enableFlag?: boolean // 正常/冻结
+    passwordFlag?: boolean // 是否有密码
     createTime?: string // 创建时间
     updateTime?: string // 修改时间
-    passwordFlag?: boolean // 是否有密码
     roleIdSet?: number[] // 角色 idSet
 }
 
