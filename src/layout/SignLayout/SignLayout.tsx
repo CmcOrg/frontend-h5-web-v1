@@ -27,11 +27,11 @@ export default function SignLayout(props: ISignLayout) {
     }
 
     return (
-        <div className={props.className}>
+        <div className={props.className + " p-t-100"}>
             <>
                 {props.children}
 
-                <div className={"abs w100 flex-center"} style={{bottom: '10px'}}>
+                <div className={"abs w100 flex-c ai-c"} style={{bottom: '10px'}}>
                     <div className={"m-r-10"}>
                         <CopyrightOutlined/> {GetCopyright()}
                     </div>
