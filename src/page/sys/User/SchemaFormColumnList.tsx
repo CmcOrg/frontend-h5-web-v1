@@ -1,4 +1,5 @@
-import {YesNoDict} from "@/util/DictUtil";
+import {SysRolePage} from "@/api/admin/SysRoleController";
+import {GetDictList, YesNoDict} from "@/util/DictUtil";
 import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysUserInsertOrUpdateDTO} from "@/api/admin/SysUserController";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
@@ -78,8 +79,17 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
         },
 
         {
-            title: '绑定角色',
+            title: '关联角色',
             dataIndex: 'roleIdSet',
+            valueType: 'select',
+            fieldProps: {
+                showSearch: true,
+                mode: 'multiple',
+                maxTagCount: 'responsive',
+            },
+            request: () => {
+                return GetDictList(SysRolePage)
+            }
         },
 
     ]

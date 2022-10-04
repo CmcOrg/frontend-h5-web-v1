@@ -116,6 +116,12 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysMenuInsertOrUpdateDTO>[] 
         },
 
         {
+            title: '重定向',
+            dataIndex: 'redirect',
+            tooltip: '优先级最高',
+        },
+
+        {
             title: '备注',
             dataIndex: 'remark',
             valueType: 'textarea',
@@ -132,12 +138,6 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysMenuInsertOrUpdateDTO>[] 
                 maxLength: 300,
                 allowClear: true,
             }
-        },
-
-        {
-            title: '重定向',
-            dataIndex: 'redirect',
-            tooltip: '优先级最高',
         },
 
     ]
