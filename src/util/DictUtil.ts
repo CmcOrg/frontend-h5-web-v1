@@ -56,29 +56,16 @@ interface IDictResult {
     id?: number
 }
 
-// 通用的，获取字典集合，接口返回值
-interface IDictResult2 {
-    label?: string // 显示用
-    value?: number // 传值用
-}
-
 // 通用的，获取字典集合
-export function GetDictList<T extends IDictResult | IDictResult2>(requestFunction: (value: MyPageDTO | any) => Promise<RequestData<T>>, iDictResult2Flag = false) {
+export function GetDictList<T extends IDictResult>(requestFunction: (value: MyPageDTO | any) => Promise<RequestData<T>>) {
     return new Promise<DictLongListVO[]>(resolve => {
         requestFunction({pageSize: -1}).then(res => {
             let dictList: DictLongListVO[] = []
             if (res.data) {
-                if (iDictResult2Flag) { // 使用类型 2的字典数据类型
-                    dictList = res.data.map((item) => ({
-                        label: (item as IDictResult2).label!,
-                        value: (item as IDictResult2).value!,
-                    }));
-                } else {
-                    dictList = res.data.map(item => ({
-                        label: (item as IDictResult).name!,
-                        value: (item as IDictResult).id!,
-                    }));
-                }
+                dictList = res.data.map(item => ({
+                    label: item.name!,
+                    value: item.id!,
+                }));
             }
             resolve(dictList)
         })
