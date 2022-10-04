@@ -103,14 +103,14 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
             menuItemRender={(item: MenuDataItem, defaultDom: React.ReactNode) => (
                 <a
                     onClick={() => {
+                        if (item.path && item.linkFlag) {
+                            window.open(item.path, '_blank')
+                            return
+                        }
                         if (item.path && item.router) {
                             if (RouterMapKeyList.includes(item.router)) {
-                                if (item.linkFlag) {
-                                    window.open(item.path, '_blank')
-                                } else {
-                                    setPathname(item.path)
-                                    getAppNav()(item.path)
-                                }
+                                setPathname(item.path)
+                                getAppNav()(item.path)
                             } else {
                                 InDev()
                             }
