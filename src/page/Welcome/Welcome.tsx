@@ -1,8 +1,8 @@
+// 欢迎页
 import {PageHeader} from "antd";
 import CommonConstant from "@/model/constant/CommonConstant";
 
-// 工作台
-export default function Workplace() {
+export default function Welcome() {
 
     return (
         <PageHeader

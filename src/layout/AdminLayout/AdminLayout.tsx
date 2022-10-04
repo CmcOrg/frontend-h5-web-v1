@@ -98,6 +98,8 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                     return ListToTree(userSelfMenuListTemp);
                 },
             }}
+            layout={"mix"}
+            splitMenus={true}
             fixSiderbar={true}
             fixedHeader={true}
             menuItemRender={(item: MenuDataItem, defaultDom: React.ReactNode) => (
