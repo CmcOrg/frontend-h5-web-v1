@@ -17,7 +17,7 @@ export interface ISignInForm {
     password: string // 密码
 }
 
-// 登录页面
+// 登录
 export default function SignIn() {
     const [signInType, setSignInType] = useState<TSignInType>('account');
     return (

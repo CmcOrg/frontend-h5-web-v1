@@ -40,7 +40,7 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysMenuInsertOrUpdateDTO>[] 
         {
             title: '路径',
             dataIndex: 'path',
-            tooltip: '相同父菜单下，子菜单 path不能重复',
+            tooltip: '相同父菜单下，子菜单路径不能重复',
         },
 
         {
