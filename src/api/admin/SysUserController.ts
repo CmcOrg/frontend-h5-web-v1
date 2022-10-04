@@ -1,5 +1,5 @@
-import {SortOrder} from "antd/es/table/interface";
 import MyOrderDTO from "@/model/dto/MyOrderDTO";
+import {SortOrder} from "antd/es/table/interface";
 import $http from "@/util/HttpUtil";
 import {AxiosRequestConfig} from "axios";
 
@@ -14,6 +14,7 @@ export function SysUserDeleteByIdSet(form: NotEmptyIdSet, config?: AxiosRequestC
 
 export interface SysUserDictListDTO {
     addAdminFlag?: boolean // 是否追加 admin账号
+    sort?: Record<string, SortOrder> // 排序字段（只在前端使用，实际传值：order）
 }
 
 export interface DictLongListVO {
@@ -23,7 +24,7 @@ export interface DictLongListVO {
 
 // 下拉列表
 export function SysUserDictList(form: SysUserDictListDTO, config?: AxiosRequestConfig) {
-    return $http.myProTreePost<DictLongListVO>('/sysUser/dictList', form, config)
+    return $http.myProPagePost<DictLongListVO>('/sysUser/dictList', form, config)
 }
 
 export interface NotNullId {
@@ -82,7 +83,6 @@ export interface SysUserPageDTO {
     current?: number // 第几页
     pageSize?: number // 每页显示条数
     order?: MyOrderDTO // 排序字段
-    sort?: Record<string, SortOrder> // 排序字段（只在前端使用，实际传值：order）
 }
 
 export interface SysUserPageVO {

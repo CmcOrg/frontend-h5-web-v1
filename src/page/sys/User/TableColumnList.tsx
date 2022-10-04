@@ -1,9 +1,9 @@
 import {YesNoDict} from "@/util/DictUtil";
 import {ActionType, ProColumns} from "@ant-design/pro-components";
-import {SysUserDeleteByIdSet, SysUserInsertOrUpdateDTO, SysUserPageVO} from "@/api/admin/SysUserController";
+import {DictLongListVO, SysUserDeleteByIdSet, SysUserInsertOrUpdateDTO} from "@/api/admin/SysUserController";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 
-const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysUserPageVO>[] => [
+const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<DictLongListVO>[] => [
     {
         title: '序号',
         dataIndex: 'index',

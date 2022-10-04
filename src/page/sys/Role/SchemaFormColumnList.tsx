@@ -1,5 +1,6 @@
+import {SysUserDictList} from "@/api/admin/SysUserController";
 import {SysMenuPage} from "@/api/admin/SysMenuController";
-import {GetDictTreeList, YesNoDict} from "@/util/DictUtil";
+import {GetDictList, GetDictTreeList, YesNoDict} from "@/util/DictUtil";
 import {TreeSelect} from "antd";
 import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysRoleInsertOrUpdateDTO} from "@/api/admin/SysRoleController";
@@ -49,7 +50,9 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysRoleInsertOrUpdateDTO>[] 
                 mode: 'multiple',
                 maxTagCount: 'responsive',
             },
-
+            request: () => {
+                return GetDictList(SysUserDictList)
+            }
         },
 
         {
