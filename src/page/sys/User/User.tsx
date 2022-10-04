@@ -15,6 +15,7 @@ import TableColumnList from "./TableColumnList";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import SchemaFormColumnList, {InitForm} from "./SchemaFormColumnList";
 import CommonConstant from "@/model/constant/CommonConstant";
+import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
 
 // 用户管理
 export default function () {
@@ -149,6 +150,10 @@ export default function () {
                 onVisibleChange={setFormVisible}
                 columns={SchemaFormColumnList()}
                 onFinish={async (form) => {
+                    if (form.password) {
+                        form.origPassword = RSAEncrypt(form.password)
+                        form.password = PasswordRSAEncrypt(form.password)
+                    }
                     await SysUserInsertOrUpdate({...currentForm.current, ...form}).then(res => {
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()

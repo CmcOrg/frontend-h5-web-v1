@@ -58,7 +58,7 @@ export interface SysUserInsertOrUpdateDTO {
     email?: string // 邮箱 {"sizeMax":200,"sizeMin":0,"regexp":"^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"}
     password?: string // 前端加密之后的密码
     origPassword?: string // 前端加密之后的原始密码
-    nickname: string // 昵称 {"regexp":"^[\\u4E00-\\u9FA5A-Za-z0-9_-]{2,20}$"}
+    nickname?: string // 昵称 {"regexp":"^[\\u4E00-\\u9FA5A-Za-z0-9_-]{2,20}$"}
     bio?: string // 个人简介
     avatarUri?: string // 头像uri
     enableFlag?: boolean // 正常/冻结

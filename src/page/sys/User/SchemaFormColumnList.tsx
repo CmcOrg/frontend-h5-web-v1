@@ -1,6 +1,7 @@
 import {YesNoDict} from "@/util/DictUtil";
 import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysUserInsertOrUpdateDTO} from "@/api/admin/SysUserController";
+import {ValidatorUtil} from "@/util/ValidatorUtil";
 
 export const InitForm: SysUserInsertOrUpdateDTO = {} as SysUserInsertOrUpdateDTO
 
@@ -36,13 +37,23 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
         },
 
         {
+            title: '密码',
+            dataIndex: 'password',
+            formItemProps: {
+                rules: [
+                    {
+                        validator: ValidatorUtil['passwordCanNullValidate']
+                    },
+                ],
+            },
+        },
+
+        {
             title: '昵称',
             dataIndex: 'nickname',
             formItemProps: {
                 rules: [
                     {
-                        required: true,
-                        whitespace: true,
                         pattern: /^[\u4E00-\u9FA5A-Za-z0-9_-]{2,20}$/,
                     },
                 ],
