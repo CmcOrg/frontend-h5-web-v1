@@ -122,10 +122,16 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                             window.open(path, '_blank')
                             return
                         }
+                        if (path && path === item.redirect) {
+                            setPathname(path)
+                            getAppNav()(path)
+                            return;
+                        }
                         if (path && item.router) {
                             if (RouterMapKeyList.includes(item.router)) {
                                 setPathname(path)
                                 getAppNav()(path)
+                                return;
                             }
                         }
                         InDev() // 否则：提示开发中
