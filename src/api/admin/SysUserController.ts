@@ -17,14 +17,14 @@ export interface SysUserDictListDTO {
     sort?: Record<string, SortOrder> // 排序字段（只在前端使用，实际传值：order）
 }
 
-export interface DictLongListVO {
-    label?: string // 显示用
-    value?: number // 传值用
+export interface DictResultVO {
+    id?: number // 传值用
+    name?: string // 显示用
 }
 
 // 下拉列表
 export function SysUserDictList(form: SysUserDictListDTO, config?: AxiosRequestConfig) {
-    return $http.myProPagePost<DictLongListVO>('/sysUser/dictList', form, config)
+    return $http.myProPagePost<DictResultVO>('/sysUser/dictList', form, config)
 }
 
 export interface NotNullId {
