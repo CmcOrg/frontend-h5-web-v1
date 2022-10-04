@@ -35,7 +35,7 @@ export interface SysMenuInfoByIdVO {
     authFlag?: boolean // 是否是权限菜单，权限菜单：不显示，只代表菜单权限
     showFlag?: boolean // 是否显示在 左侧的菜单栏里面，如果为 false，也可以通过 $router.push()访问到
     linkFlag?: boolean // 是否外链，即，打开页面会在一个新的窗口打开
-    redirect?: string // 重定向，暂时未使用
+    redirect?: string // 重定向，优先级最高
     firstFlag?: boolean // 是否是起始页面，备注：只能存在一个 firstFlag === true 的菜单
     icon?: string // 图标
     orderNo?: number // 排序号（值越大越前面，默认为 0）
@@ -71,7 +71,7 @@ export interface SysMenuInsertOrUpdateDTO {
     orderNo?: number // 排序号（值越大越前面，默认为 0）
     showFlag?: boolean // 是否显示在 左侧的菜单栏里面，如果为 false，也可以通过 $router.push()访问到
     remark?: string // 备注
-    redirect?: string // 重定向，暂时未使用
+    redirect?: string // 重定向，优先级最高
     id?: number // 主键id {"min":1}
 }
 
@@ -89,7 +89,7 @@ export interface SysMenuPageDTO {
     enableFlag?: boolean // 是否启用
     linkFlag?: boolean // 是否外链，即，打开页面会在一个新的窗口打开
     router?: string // 路由
-    redirect?: string // 重定向，暂时未使用
+    redirect?: string // 重定向，优先级最高
     firstFlag?: boolean // 是否是起始页面，备注：只能存在一个 firstFlag === true 的菜单
     authFlag?: boolean // 是否是权限菜单，权限菜单：不显示，只代表菜单权限
     current?: number // 第几页
@@ -106,7 +106,7 @@ export interface SysMenuDO {
     authFlag?: boolean // 是否是权限菜单，权限菜单：不显示，只代表菜单权限
     showFlag?: boolean // 是否显示在 左侧的菜单栏里面，如果为 false，也可以通过 $router.push()访问到
     linkFlag?: boolean // 是否外链，即，打开页面会在一个新的窗口打开
-    redirect?: string // 重定向，暂时未使用
+    redirect?: string // 重定向，优先级最高
     firstFlag?: boolean // 是否是起始页面，备注：只能存在一个 firstFlag === true 的菜单
     icon?: string // 图标
     orderNo?: number // 排序号（值越大越前面，默认为 0）

@@ -36,6 +36,8 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysMenuInsertOrUpda
         valueEnum: YesNoDict
     },
 
+    {title: '重定向', dataIndex: 'redirect', ellipsis: true,},
+
     {
         title: '起始页面',
         dataIndex: 'firstFlag',

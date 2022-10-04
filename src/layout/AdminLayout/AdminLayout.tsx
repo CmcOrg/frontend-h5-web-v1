@@ -113,18 +113,22 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
             menuItemRender={(item: MenuDataItem, defaultDom: React.ReactNode) => (
                 <a
                     onClick={() => {
-                        if (item.path && item.linkFlag) {
-                            window.open(item.path, '_blank')
+                        let path = item.path // 路径
+                        let linkFlag = item.linkFlag // 是否另外一个页面打开
+                        if (item.redirect) {
+                            path = item.redirect
+                        }
+                        if (path && linkFlag) {
+                            window.open(path, '_blank')
                             return
                         }
-                        if (item.path && item.router) {
+                        if (path && item.router) {
                             if (RouterMapKeyList.includes(item.router)) {
-                                setPathname(item.path)
-                                getAppNav()(item.path)
-                            } else {
-                                InDev()
+                                setPathname(path)
+                                getAppNav()(path)
                             }
                         }
+                        InDev() // 否则：提示开发中
                     }}
                 >
                     <>

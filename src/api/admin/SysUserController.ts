@@ -32,6 +32,9 @@ export interface NotNullId {
 
 export interface SysUserInfoByIdVO {
     roleIdSet?: number[] // 角色 idSet
+    nickname?: string // 昵称
+    bio?: string // 个人简介
+    avatarUri?: string // 头像uri
     enableFlag?: boolean // 是否启用
     delFlag?: boolean // 是否逻辑删除
     jwtSecretSuf?: string // 用户 jwt私钥后缀（uuid）

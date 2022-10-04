@@ -134,6 +134,12 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysMenuInsertOrUpdateDTO>[] 
             }
         },
 
+        {
+            title: '重定向',
+            dataIndex: 'redirect',
+            tooltip: '优先级最高',
+        },
+
     ]
 }
 
