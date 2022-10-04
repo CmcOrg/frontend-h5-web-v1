@@ -1,4 +1,11 @@
-import {DefaultFooter, MenuDataItem, PageContainer, ProLayout} from "@ant-design/pro-components";
+import {
+    DefaultFooter,
+    MenuDataItem,
+    PageContainer,
+    ProLayout,
+    RouteContext,
+    RouteContextType
+} from "@ant-design/pro-components";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {Outlet} from "react-router-dom";
 import {RouterMapKeyList} from "@/router/RouterMap";
@@ -17,6 +24,7 @@ import MyIcon from "@/componse/MyIcon/MyIcon";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons/lib";
 import {GetBeiAnHref, GetBeiAnNumber, GetCopyright} from "@/layout/SignLayout/SignLayout";
 import {SignOutSelf} from "@/api/none/SignOutController";
+import {Avatar, Button, Dropdown, Menu, Space} from "antd";
 
 // 前往：第一个页面
 function goFirstPage(menuList: SysMenuDO[]) {
@@ -124,23 +132,45 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                     </>
                 </a>
             )}
-            avatarProps={{
-                src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-                title: '九妮妮',
-            }}
-            actionsRender={(props) => {
-                return [
-                    <UserOutlined key="1" title={"个人中心"} onClick={InDev}/>,
-                    <LogoutOutlined key="2" title={"退出登录"} onClick={() => {
-                        ExecConfirm(() => {
-                            return SignOutSelf().then((res) => {
-                                ToastSuccess(res.msg)
-                                SignOut()
-                            })
-                        }, undefined, "确定退出登录吗？")
-                    }}/>,
-                ];
-            }}
+            rightContentRender={() => (
+                <RouteContext.Consumer>
+                    {(routeContextType: RouteContextType) => {
+                        return <Space size={"large"}>
+                            <Dropdown overlay={<Menu items={[
+                                {
+                                    key: '1',
+                                    label: <a onClick={InDev}>
+                                        个人中心
+                                    </a>,
+                                    icon: <UserOutlined/>
+                                },
+                                {
+                                    key: '2',
+                                    danger: true,
+                                    label: <a
+                                        onClick={() => {
+                                            ExecConfirm(() => {
+                                                return SignOutSelf().then((res) => {
+                                                    ToastSuccess(res.msg)
+                                                    SignOut()
+                                                })
+                                            }, undefined, "确定退出登录吗？")
+                                        }}
+                                    >
+                                        退出登录
+                                    </a>,
+                                    icon: <LogoutOutlined/>
+                                },
+                            ]}/>}>
+                                <Button type="text">
+                                    <Avatar size="small"
+                                            src={"https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"}/>
+                                </Button>
+                            </Dropdown>
+                        </Space>
+                    }}
+                </RouteContext.Consumer>
+            )}
             footerRender={() => (
                 <DefaultFooter
                     links={[
