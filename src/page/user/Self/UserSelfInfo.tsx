@@ -26,6 +26,7 @@ export default function () {
 
     return (
         <ProDescriptions<UserSelfInfoVO>
+            loading={false}
             title={USER_CENTER_KEY_ONE}
             actionRef={actionRef}
             request={() => {
