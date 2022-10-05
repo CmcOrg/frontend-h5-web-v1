@@ -72,7 +72,7 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
         },
 
         {
-            title: '正常/冻结',
+            title: '是否正常',
             dataIndex: 'enableFlag',
             valueEnum: YesNoDict,
             valueType: 'switch',

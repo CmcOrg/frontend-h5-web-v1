@@ -21,7 +21,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
     {title: '登录名', dataIndex: 'signInName', ellipsis: true,},
 
     {
-        title: '正常/冻结',
+        title: '是否正常',
         dataIndex: 'enableFlag',
         valueEnum: YesNoDict
     },
