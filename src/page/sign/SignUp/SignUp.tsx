@@ -23,7 +23,7 @@ export interface ISignUpForm {
 const signUpTypeArr = ['登录名', '邮箱']
 
 // 注册
-export default function SignUp() {
+export default function () {
     const [activeKey, setActiveKey] = useState<TSignUpType>('0');
     const formRef = useRef<ProFormInstance<ISignUpForm>>(null);
     return (

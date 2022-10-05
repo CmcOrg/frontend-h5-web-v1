@@ -20,7 +20,7 @@ export function GetBeiAnNumber() {
 }
 
 // 登录注册页面布局
-export default function SignLayout(props: ISignLayout) {
+export default function (props: ISignLayout) {
 
     if (localStorage.getItem(LocalStorageKey.JWT)) {
         return <Navigate to={"/"}/>

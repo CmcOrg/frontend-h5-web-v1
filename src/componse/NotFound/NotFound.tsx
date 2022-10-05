@@ -4,7 +4,7 @@ import SessionStorageKey from "@/model/constant/SessionStorageKey";
 import LocalStorageKey from "@/model/constant/LocalStorageKey";
 
 // 404页面
-export default function NotFound() {
+export default function () {
     console.log("NotFound")
     if (!sessionStorage.getItem(SessionStorageKey.ADMIN_REDIRECT_PATH)) {
         sessionStorage.setItem(SessionStorageKey.ADMIN_REDIRECT_PATH, window.location.pathname)

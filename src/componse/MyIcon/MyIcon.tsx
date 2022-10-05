@@ -11,7 +11,7 @@ interface IMyIcon extends IconBaseProps {
 }
 
 // 自定义封装：@ant-design/icons
-export default function MyIcon(props: IMyIcon) {
+export default function (props: IMyIcon) {
     if (!props.icon) {
         return null
     }

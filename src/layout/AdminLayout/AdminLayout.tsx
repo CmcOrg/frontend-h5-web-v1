@@ -50,7 +50,7 @@ function goFirstPage(menuList: SysMenuDO[]) {
 }
 
 // Admin 页面布局
-export default function AdminLayout() {
+export default function () {
 
     const appDispatch = useAppDispatch()
     const [element, setElement] = useState<React.ReactNode>(null);

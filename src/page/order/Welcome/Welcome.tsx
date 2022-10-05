@@ -1,7 +1,7 @@
-// 欢迎页
 import {PageHeader} from "antd";
 
-export default function Welcome() {
+// 欢迎页
+export default function () {
 
     return (
         <PageHeader

@@ -5,7 +5,8 @@ import RouterMap, {RouterMapKeyList} from "@/router/RouterMap";
 import PathConstant from "@/model/constant/PathConstant";
 import {useAppSelector} from "@/store";
 
-export default function App() {
+// App
+export default function () {
 
     const userSelfMenuList = useAppSelector(
         (state) => state.user.userSelfMenuList

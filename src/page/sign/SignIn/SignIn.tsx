@@ -18,7 +18,7 @@ export interface ISignInForm {
 }
 
 // 登录
-export default function SignIn() {
+export default function () {
     const [signInType, setSignInType] = useState<TSignInType>('account');
     return (
         <SignLayout className={"Geek-Blue"}>
