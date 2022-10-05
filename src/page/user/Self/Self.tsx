@@ -11,23 +11,21 @@ export const USER_CENTER_KEY_TWO = "账号设置"
 // 个人中心
 export default function () {
 
+    const itemArr = [
+        {key: '1', label: <span><UserOutlined/>{USER_CENTER_KEY_ONE}</span>, children: <UserSelfInfo/>},
+        {key: '2', label: <span><SettingOutlined/>{USER_CENTER_KEY_TWO}</span>, children: <UserSelfSetting/>},
+    ];
+
     return (
         <RouteContext.Consumer>
             {(routeContextType: RouteContextType) => {
-                return <Card>
-                    <Tabs tabPosition={routeContextType.isMobile ? 'top' : 'left'}>
-                        <Tabs.TabPane key={'1'} tab={
-                            <span><UserOutlined/>{USER_CENTER_KEY_ONE}</span>
-                        }>
-                            <UserSelfInfo/>
-                        </Tabs.TabPane>
-                        <Tabs.TabPane key={'2'} tab={
-                            <span><SettingOutlined/>{USER_CENTER_KEY_TWO}</span>
-                        }>
-                            <UserSelfSetting/>
-                        </Tabs.TabPane>
-                    </Tabs>
-                </Card>
+                return (
+                    <div className={"flex-center p-b-50"}>
+                        <Card style={{width: routeContextType.isMobile ? '100%' : '45%'}}>
+                            <Tabs items={itemArr} tabPosition={routeContextType.isMobile ? 'top' : 'left'}/>
+                        </Card>
+                    </div>
+                )
             }}
         </RouteContext.Consumer>
     )
