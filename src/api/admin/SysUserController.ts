@@ -14,7 +14,6 @@ export function SysUserDeleteByIdSet(form: NotEmptyIdSet, config?: AxiosRequestC
 
 export interface SysUserDictListDTO {
     addAdminFlag?: boolean // 是否追加 admin账号
-    sort?: Record<string, SortOrder> // 排序字段（只在前端使用，实际传值：order）
 }
 
 export interface DictResultVO {
@@ -83,6 +82,7 @@ export interface SysUserPageDTO {
     current?: number // 第几页
     pageSize?: number // 每页显示条数
     order?: MyOrderDTO // 排序字段
+    sort?: Record<string, SortOrder> // 排序字段（只在前端使用，实际传值：order）
 }
 
 export interface SysUserPageVO {

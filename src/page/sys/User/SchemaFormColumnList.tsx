@@ -2,6 +2,7 @@ import {SysRolePage} from "@/api/admin/SysRoleController";
 import {GetDictList, YesNoDict} from "@/util/DictUtil";
 import {ProFormColumnsType} from "@ant-design/pro-components";
 import {SysUserInsertOrUpdateDTO} from "@/api/admin/SysUserController";
+import {ValidatorUtil} from "@/util/ValidatorUtil";
 
 export const InitForm: SysUserInsertOrUpdateDTO = {} as SysUserInsertOrUpdateDTO
 
@@ -31,6 +32,18 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
                         min: 0,
                         max: 200,
                         pattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+                    },
+                ],
+            },
+        },
+
+        {
+            title: '密码',
+            dataIndex: 'password',
+            formItemProps: {
+                rules: [
+                    {
+                        validator: ValidatorUtil['passwordCanNullValidate']
                     },
                 ],
             },

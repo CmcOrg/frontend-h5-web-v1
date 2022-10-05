@@ -3,18 +3,19 @@ import {ActionType, BetaSchemaForm, ColumnsState, ProTable} from "@ant-design/pr
 import {Button, Form, Space} from "antd";
 import {PlusOutlined} from "@ant-design/icons/lib";
 import {
-    DictLongListVO,
     SysUserDeleteByIdSet,
     SysUserInfoById,
     SysUserInsertOrUpdate,
     SysUserInsertOrUpdateDTO,
     SysUserPage,
-    SysUserPageDTO
+    SysUserPageDTO,
+    SysUserPageVO
 } from "@/api/admin/SysUserController";
 import TableColumnList from "./TableColumnList";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import SchemaFormColumnList, {InitForm} from "./SchemaFormColumnList";
 import CommonConstant from "@/model/constant/CommonConstant";
+import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
 
 // 用户管理
 export default function () {
@@ -33,7 +34,7 @@ export default function () {
 
     return (
         <>
-            <ProTable<DictLongListVO, SysUserPageDTO>
+            <ProTable<SysUserPageVO, SysUserPageDTO>
                 scroll={{y: CommonConstant.TABLE_HEIGHT}}
                 actionRef={actionRef}
                 rowKey={"id"}
@@ -149,6 +150,13 @@ export default function () {
                 onVisibleChange={setFormVisible}
                 columns={SchemaFormColumnList()}
                 onFinish={async (form) => {
+                    if (form.password) {
+                        form.origPassword = RSAEncrypt(form.password)
+                        form.password = PasswordRSAEncrypt(form.password)
+                    }
+                    if (form.email === '') {
+                        form.email = undefined
+                    }
                     await SysUserInsertOrUpdate({...currentForm.current, ...form}).then(res => {
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()
