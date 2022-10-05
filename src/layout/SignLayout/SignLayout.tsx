@@ -27,7 +27,7 @@ export default function SignLayout(props: ISignLayout) {
     }
 
     return (
-        <div className={props.className + " p-t-100"}>
+        <div className={props.className + " p-t-50"}>
             <>
                 {props.children}
 
