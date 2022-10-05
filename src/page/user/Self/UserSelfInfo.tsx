@@ -1,7 +1,6 @@
 import {ActionType, ProDescriptions} from "@ant-design/pro-components";
 import {default as React, useRef} from "react";
 import {useAppDispatch} from "@/store";
-import {Form} from "antd";
 import {USER_CENTER_KEY_ONE} from "@/page/user/Self/Self";
 import {ToastSuccess} from "@/util/ToastUtil";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
@@ -15,24 +14,18 @@ export default function () {
 
     const actionRef = useRef<ActionType>()
 
-    const [useForm] = Form.useForm<UserSelfUpdateInfoDTO>();
-
     const currentForm = useRef<UserSelfUpdateInfoDTO>({})
 
     // 执行：更新用户基本信息
     function doSysUserSelfUpdateInfo(form: UserSelfUpdateInfoDTO) {
         return UserSelfUpdateInfo(form).then(res => {
-            currentForm.current = form
-            appDispatch(setUserSelfInfo(form))
+            actionRef.current?.reload()
             ToastSuccess(res.msg)
         })
     }
 
     return (
         <ProDescriptions<UserSelfInfoVO>
-            formProps={{
-                form: useForm
-            }}
             title={USER_CENTER_KEY_ONE}
             actionRef={actionRef}
             request={() => {
@@ -49,6 +42,9 @@ export default function () {
             }}
             editable={{
                 onSave: async (key, record) => {
+                    if (record.nickname === '') {
+                        record.nickname = undefined
+                    }
                     await doSysUserSelfUpdateInfo({...record, avatarUri: currentForm.current.avatarUri})
                     return true;
                 },
