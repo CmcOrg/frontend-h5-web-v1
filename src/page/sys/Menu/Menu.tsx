@@ -201,6 +201,9 @@ export default function () {
                 onVisibleChange={setFormVisible}
                 columns={SchemaFormColumnList()}
                 onFinish={async (form) => {
+                    if (!form.router) {
+                        form.router = ''
+                    }
                     await SysMenuInsertOrUpdate({...currentForm.current, ...form}).then(res => {
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()
