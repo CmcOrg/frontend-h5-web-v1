@@ -74,7 +74,7 @@ export default function () {
                     placeholder={'密码'}
                     rules={[
                         {
-                            validator: ValidatorUtil['passwordValidate']
+                            validator: ValidatorUtil.passwordValidate
                         }
                     ]}
                 />
@@ -90,7 +90,7 @@ export default function () {
                             captchaProps={{
                                 size: 'large',
                             }}
-                            rules={[{validator: ValidatorUtil['codeValidate']}]}
+                            rules={[{validator: ValidatorUtil.codeValidate}]}
                             placeholder={'请输入验证码'}
                             name="code"
                             onGetCaptcha={async () => {

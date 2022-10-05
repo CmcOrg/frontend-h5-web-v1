@@ -44,7 +44,7 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
                 tooltip: '只有新增时设置值才会生效',
                 rules: [
                     {
-                        validator: ValidatorUtil['passwordCanNullValidate']
+                        validator: ValidatorUtil.passwordCanNullValidate
                     },
                 ],
             },
