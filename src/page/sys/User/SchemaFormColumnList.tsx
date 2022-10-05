@@ -56,7 +56,7 @@ const SchemaFormColumnList = (): ProFormColumnsType<SysUserInsertOrUpdateDTO>[] 
             formItemProps: {
                 rules: [
                     {
-                        pattern: /^[\u4E00-\u9FA5A-Za-z0-9_-]{2,20}$/,
+                        validator: ValidatorUtil.nicknameCanNullValidate
                     },
                 ],
             },
