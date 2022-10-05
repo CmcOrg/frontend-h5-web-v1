@@ -169,7 +169,7 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                             <Dropdown overlay={<Menu items={[
                                 {
                                     key: '1',
-                                    label: <a onClick={InDev}>
+                                    label: <a onClick={() => getAppNav()(PathConstant.USER_SELF_PATH)}>
                                         个人中心
                                     </a>,
                                     icon: <UserOutlined/>

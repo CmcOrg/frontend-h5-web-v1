@@ -204,6 +204,9 @@ export default function () {
                     if (!form.router) {
                         form.router = ''
                     }
+                    if (!form.parentId) {
+                        form.parentId = 0
+                    }
                     await SysMenuInsertOrUpdate({...currentForm.current, ...form}).then(res => {
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()
