@@ -38,7 +38,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysDictInsertOrUpda
         valueEnum: YesNoDict
     },
 
-    {title: '备注', dataIndex: 'remark', ellipsis: true,},
+    {title: '备注', dataIndex: 'remark', ellipsis: true, width: 50,},
 
     {
         title: '操作',
