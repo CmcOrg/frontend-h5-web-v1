@@ -158,6 +158,9 @@ export default function () {
                     if (form.email === '') {
                         form.email = undefined
                     }
+                    if (form.signInName === '') {
+                        form.signInName = undefined
+                    }
                     await SysUserInsertOrUpdate({...currentForm.current, ...form}).then(res => {
                         ToastSuccess(res.msg)
                         actionRef.current?.reload()
