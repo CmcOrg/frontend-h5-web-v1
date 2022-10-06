@@ -49,7 +49,7 @@ export default function () {
                 {
                     title: '密码',
                     actions: [
-                        userSelfInfo.email ? <UserSelfUpdatePasswordByPasswordModalForm/> :
+                        userSelfInfo.email ? <UserSelfUpdatePasswordByCodeModalForm/> :
                             <UserSelfUpdatePasswordByPasswordModalForm/>
                     ]
                 },
