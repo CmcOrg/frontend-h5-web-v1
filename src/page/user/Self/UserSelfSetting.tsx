@@ -32,6 +32,8 @@ interface IUserSelfSetting {
 
 // TODO：登录记录
 const RequestSelfLoginRecordModalTitle = "登录记录"
+// TODO：设置登录名
+const UpdateAccountModalTitle = "设置登录名"
 const UserSelfDeleteModalTitle = "账号注销"
 const UserSelfDeleteModalTargetName = "立即注销"
 const UserSelfUpdatePasswordTitle = "修改密码"
