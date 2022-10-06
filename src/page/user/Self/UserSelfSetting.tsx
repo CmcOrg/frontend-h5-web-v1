@@ -10,6 +10,7 @@ import {ValidatorUtil} from "@/util/ValidatorUtil";
 import {NotBlankCodeDTO, SignEmailSignDelete, SignEmailSignDeleteSendCode} from "@/api/sign/SignEmailController";
 import {SignSignInNameSignDelete, SignSignInNameSignDeleteDTO} from "@/api/sign/SignSignInNameController";
 import {PasswordRSAEncrypt} from "@/util/RsaUtil";
+import {SignOut} from "@/util/UserUtil";
 
 interface IUserSelfSetting {
     title: string
@@ -88,9 +89,9 @@ export function UserSelfDeleteByPasswordModalForm() {
             title={UserSelfDeleteModalTitle}
             trigger={<a className={"red3"}>{UserSelfDeleteModalTargetName}</a>}
             onFinish={async (form) => {
-                console.log('currentPassword', form.currentPassword)
                 const currentPassword = PasswordRSAEncrypt(form.currentPassword)
                 await SignSignInNameSignDelete({currentPassword}).then(res => {
+                    SignOut()
                     ToastSuccess(res.msg)
                 })
                 return true
@@ -124,6 +125,7 @@ export function UserSelfDeleteByCodeModalForm() {
             trigger={<a className={"red3"}>{UserSelfDeleteModalTargetName}</a>}
             onFinish={async (form) => {
                 await SignEmailSignDelete({code: form.code}).then(res => {
+                    SignOut()
                     ToastSuccess(res.msg)
                 })
                 return true
