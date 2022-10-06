@@ -15,7 +15,12 @@ import {
     SignEmailUpdatePasswordDTO,
     SignEmailUpdatePasswordSendCode
 } from "@/api/sign/SignEmailController";
-import {SignSignInNameSignDelete, SignSignInNameSignDeleteDTO} from "@/api/sign/SignSignInNameController";
+import {
+    SignSignInNameSignDelete,
+    SignSignInNameSignDeleteDTO,
+    SignSignInNameUpdatePassword,
+    SignSignInNameUpdatePasswordDTO
+} from "@/api/sign/SignSignInNameController";
 import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
 import {SignOut} from "@/util/UserUtil";
 
@@ -44,7 +49,8 @@ export default function () {
                 {
                     title: '密码',
                     actions: [
-                        <UserSelfUpdatePasswordForCodeModalForm/>
+                        userSelfInfo.email ? <UserSelfUpdatePasswordByPasswordModalForm/> :
+                            <UserSelfUpdatePasswordByPasswordModalForm/>
                     ]
                 },
                 {
@@ -87,8 +93,49 @@ export default function () {
     )
 }
 
+// 用户修改密码：通过：旧密码
+export function UserSelfUpdatePasswordByPasswordModalForm() {
+    return <ModalForm<SignSignInNameUpdatePasswordDTO>
+        modalProps={{
+            maskClosable: false
+        }}
+        isKeyPressSubmit
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={UserSelfUpdatePasswordTitle}
+        trigger={<a>{UserSelfUpdatePasswordTitle}</a>}
+        onFinish={async (form) => {
+            form.oldPassword = RSAEncrypt(form.oldPassword)
+            form.origNewPassword = RSAEncrypt(form.newPassword)
+            form.newPassword = PasswordRSAEncrypt(form.newPassword)
+            await SignSignInNameUpdatePassword(form).then(res => {
+                SignOut()
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormText
+            label="旧密码"
+            placeholder={'请输入旧密码'}
+            name="oldPassword"
+            fieldProps={{
+                allowClear: true,
+            }}
+            rules={[{required: true,},]}/>
+        <ProFormText
+            label="新密码"
+            placeholder={'请输入新密码'}
+            name="newPassword"
+            required
+            fieldProps={{
+                allowClear: true,
+            }}
+            rules={[{validator: ValidatorUtil.passwordValidate}]}/>
+    </ModalForm>
+}
+
 // 用户修改密码：通过：发送验证码
-export function UserSelfUpdatePasswordForCodeModalForm() {
+export function UserSelfUpdatePasswordByCodeModalForm() {
     return <ModalForm<SignEmailUpdatePasswordDTO>
         modalProps={{
             maskClosable: false
