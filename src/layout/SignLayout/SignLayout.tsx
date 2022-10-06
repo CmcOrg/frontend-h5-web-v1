@@ -1,7 +1,9 @@
-import {PropsWithChildren} from "react";
+import {PropsWithChildren, useEffect} from "react";
 import LocalStorageKey from "@/model/constant/LocalStorageKey";
 import {Navigate} from "react-router-dom";
 import {CopyrightOutlined} from "@ant-design/icons/lib";
+import {useAppDispatch} from "@/store";
+import {signOut} from "@/store/userSlice";
 
 interface ISignLayout extends PropsWithChildren {
     className?: string
@@ -25,6 +27,11 @@ export default function (props: ISignLayout) {
     if (localStorage.getItem(LocalStorageKey.JWT)) {
         return <Navigate to={"/"}/>
     }
+
+    const appDispatch = useAppDispatch();
+    useEffect(() => {
+        appDispatch(signOut()) // store 退出登录
+    }, [])
 
     return (
         <div className={props.className + " p-t-50 p-b-10 flex-c vwh100"}>

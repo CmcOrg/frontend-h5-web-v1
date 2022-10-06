@@ -33,9 +33,15 @@ export const userSlice = createSlice({
             state.userSelfInfo = action.payload
             setLocalStorageUserSelfInfo(action.payload)
         },
+        // 退出登录
+        signOut: (state) => {
+            state.userSelfMenuList = []
+            state.userSelfInfo = {}
+            setLocalStorageUserSelfInfo({})
+        }
     },
 })
 
-export const {setUserSelfMenuList, setUserSelfInfo} = userSlice.actions
+export const {setUserSelfMenuList, setUserSelfInfo, signOut} = userSlice.actions
 
 export default userSlice.reducer
