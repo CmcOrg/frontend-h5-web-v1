@@ -11,6 +11,7 @@ interface IUserSelfSetting {
     actions: ReactNode[];
 }
 
+// TODO：登录记录
 const RequestSelfLoginRecordModalTitle = "登录记录"
 const UserSelfDeleteModalTitle = "账号注销"
 const UserSelfDeleteModalTargetName = "立即注销"
@@ -19,7 +20,7 @@ const UserSelfUpdatePasswordTitle = "修改密码"
 // 账号设置
 export default function () {
 
-    const userSelfBaseInfo = useAppSelector((state) => state.user.userSelfBaseInfo)
+    const userSelfInfo = useAppSelector((state) => state.user.userSelfInfo)
 
     return (
         <List<IUserSelfSetting>
@@ -32,7 +33,7 @@ export default function () {
                 },
                 {
                     title: '邮箱',
-                    description: userSelfBaseInfo.email,
+                    description: userSelfInfo.email,
                     actions: []
                 },
                 {
@@ -49,10 +50,6 @@ export default function () {
                             执行刷新
                         </a>
                     ]
-                },
-                {
-                    title: RequestSelfLoginRecordModalTitle,
-                    actions: []
                 },
                 {
                     title: UserSelfDeleteModalTitle,
@@ -72,39 +69,3 @@ export default function () {
         />
     )
 }
-
-// export function UserSelfDeleteModalForm() {
-//
-//     return <ModalForm<UserSelfUpdatePasswordDTO>
-//         modalProps={{
-//             maskClosable: false
-//         }}
-//         isKeyPressSubmit
-//         width={CommonConstant.MODAL_FORM_WIDTH}
-//         title={UserSelfDeleteModalTitle}
-//         trigger={<a className={"red3"}>{UserSelfDeleteModalTargetName}</a>}
-//         onFinish={async (form) => {
-//             await UserSelfDelete({code: form.code}).then(res => {
-//                 ToastSuccess(res.msg)
-//             })
-//             return true
-//         }}
-//     >
-//         <ProFormCaptcha
-//             fieldProps={{
-//                 maxLength: 6,
-//                 allowClear: true,
-//             }}
-//             required
-//             label="验证码"
-//             placeholder={'请输入验证码'}
-//             name="code"
-//             rules={[{validator: ValidatorUtil.codeValidate}]}
-//             onGetCaptcha={async () => {
-//                 await UserSelfDeleteSendEmailCode().then(res => {
-//                     ToastSuccess(res.msg)
-//                 })
-//             }}
-//         />
-//     </ModalForm>
-// }

@@ -75,7 +75,7 @@ export default function () {
                 <div
                     className={"m-b-24 flex jc-sb"}
                 >
-                    {/* TODO */}
+                    {/* TODO：记住我 */}
                     <ProFormCheckbox noStyle>
                         记住我
                     </ProFormCheckbox>

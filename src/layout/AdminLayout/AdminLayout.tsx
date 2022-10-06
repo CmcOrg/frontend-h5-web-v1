@@ -15,16 +15,17 @@ import {useEffect, useState} from "react";
 import {SysMenuDO, SysMenuUserSelfMenuList} from "@/api/admin/SysMenuController";
 import PathConstant from "@/model/constant/PathConstant";
 import SessionStorageKey from "@/model/constant/SessionStorageKey";
-import {useAppDispatch} from "@/store";
+import {useAppDispatch, useAppSelector} from "@/store";
 import {ExecConfirm, ToastError, ToastSuccess} from "@/util/ToastUtil";
 import {SignOut} from "@/util/UserUtil";
-import {setUserSelfMenuList} from "@/store/userSlice";
+import {setUserSelfInfo, setUserSelfMenuList} from "@/store/userSlice";
 import {ListToTree} from "@/util/TreeUtil";
 import MyIcon from "@/componse/MyIcon/MyIcon";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons/lib";
 import {GetBeiAnHref, GetBeiAnNumber, GetCopyright} from "@/layout/SignLayout/SignLayout";
 import {SignOutSelf} from "@/api/none/SignOutController";
-import {Avatar, Button, Dropdown, Menu, Space} from "antd";
+import {Avatar, Button, Dropdown, Menu, Space, Typography} from "antd";
+import {UserSelfInfo} from "@/api/none/UserSelfController";
 
 // 前往：第一个页面
 function goFirstPage(menuList: SysMenuDO[]) {
@@ -87,8 +88,13 @@ interface IAdminLayoutElement {
 // Admin 页面布局元素
 function AdminLayoutElement(props: IAdminLayoutElement) {
     const [pathname, setPathname] = useState<string>('')
+    const appDispatch = useAppDispatch();
+    const userSelfInfo = useAppSelector((state) => state.user.userSelfInfo)
     useEffect(() => {
         setPathname(window.location.pathname)
+        UserSelfInfo().then(res => {
+            appDispatch(setUserSelfInfo(res.data))
+        })
     }, [])
     return (
         <ProLayout
@@ -196,9 +202,18 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                                     icon: <LogoutOutlined/>
                                 },
                             ]}/>}>
-                                <Button type="text">
-                                    <Avatar size="small"
-                                            src={"https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"}/>
+                                <Button type="text" onClick={() => {
+                                    if (!routeContextType.isMobile) {
+                                        setPathname(PathConstant.USER_SELF_PATH)
+                                        getAppNav()(PathConstant.USER_SELF_PATH)
+                                    }
+                                }}>
+                                    <Space>
+                                        <Avatar size="small"
+                                                src={"https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"}/>
+                                        <Typography.Text ellipsis style={{width: 35}}
+                                                         type="secondary">{userSelfInfo.nickname}</Typography.Text>
+                                    </Space>
                                 </Button>
                             </Dropdown>
                         </Space>

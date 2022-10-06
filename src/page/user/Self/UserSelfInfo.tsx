@@ -55,6 +55,11 @@ export default function () {
                 {
                     title: '昵称',
                     dataIndex: 'nickname',
+                    fieldProps: {
+                        showCount: true,
+                        maxLength: 20,
+                        allowClear: true,
+                    },
                     formItemProps: {
                         required: true,
                         rules: [

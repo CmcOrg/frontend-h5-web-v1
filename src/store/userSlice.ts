@@ -5,20 +5,20 @@ import LocalStorageKey from "@/model/constant/LocalStorageKey";
 
 interface IUserSlice {
     userSelfMenuList: SysMenuDO[] // 用户菜单
-    userSelfBaseInfo: UserSelfInfoVO // 当前用户，基本信息
+    userSelfInfo: UserSelfInfoVO // 当前用户，基本信息
 }
 
 const initialState: IUserSlice = {
     userSelfMenuList: [] as SysMenuDO[],
-    userSelfBaseInfo: JSON.parse(
+    userSelfInfo: JSON.parse(
         localStorage.getItem(LocalStorageKey.USER_SELF_INFO) || '{}'
     ),
 }
 
-function setLocalStorageUserInfo(userBaseInfo: UserSelfInfoVO) {
+function setLocalStorageUserSelfInfo(userSelfInfo: UserSelfInfoVO) {
     localStorage.setItem(
         LocalStorageKey.USER_SELF_INFO,
-        JSON.stringify(userBaseInfo)
+        JSON.stringify(userSelfInfo)
     )
 }
 
@@ -30,8 +30,8 @@ export const userSlice = createSlice({
             state.userSelfMenuList = action.payload
         },
         setUserSelfInfo: (state, action: PayloadAction<UserSelfInfoVO>) => {
-            state.userSelfBaseInfo = action.payload
-            setLocalStorageUserInfo(action.payload)
+            state.userSelfInfo = action.payload
+            setLocalStorageUserSelfInfo(action.payload)
         },
     },
 })
