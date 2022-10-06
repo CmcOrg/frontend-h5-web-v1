@@ -2,6 +2,7 @@ import {YesNoDict} from "@/util/DictUtil";
 import {ActionType, ProColumns} from "@ant-design/pro-components";
 import {SysParamDeleteByIdSet, SysParamDO, SysParamInsertOrUpdateDTO} from "@/api/admin/SysParamController";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
+import {Typography} from "antd";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysParamInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysParamDO>[] => [
     {
@@ -12,7 +13,11 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysParamInsertOrUpd
 
     {title: '配置名', dataIndex: 'name', ellipsis: true,},
 
-    {title: '值', dataIndex: 'value', ellipsis: true, hideInSearch: true,},
+    {
+        title: '值', dataIndex: 'value', hideInSearch: true, width: 300, renderText: (text) => {
+            return <Typography.Text ellipsis={{tooltip: true}} style={{width: 300}}>{text}</Typography.Text>
+        }
+    },
 
     {
         title: '创建时间',
@@ -31,10 +36,15 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysParamInsertOrUpd
     {
         title: '是否启用',
         dataIndex: 'enableFlag',
-        valueEnum: YesNoDict
+        valueEnum: YesNoDict,
+        width: 80
     },
 
-    {title: '备注', dataIndex: 'remark', ellipsis: true,},
+    {
+        title: '备注', dataIndex: 'remark', width: 300, renderText: (text) => {
+            return <Typography.Text ellipsis={{tooltip: true}} style={{width: 300}}>{text}</Typography.Text>
+        }
+    },
 
     {
         title: '操作',
