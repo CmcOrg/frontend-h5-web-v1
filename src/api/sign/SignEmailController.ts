@@ -90,8 +90,8 @@ export function SignEmailUpdateAccount(form: SignEmailUpdateAccountDTO, config?:
 }
 
 // 修改邮箱-发送验证码
-export function SignEmailUpdateAccountSendCode(form: EmailNotBlankDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sign/email/updateAccount/sendCode', form, config)
+export function SignEmailUpdateAccountSendCode(config?: AxiosRequestConfig) {
+    return $http.myPost<string>('/sign/email/updateAccount/sendCode', undefined, config)
 }
 
 export interface SignEmailUpdatePasswordDTO {

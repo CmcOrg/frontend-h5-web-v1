@@ -1,16 +1,20 @@
 import {useAppSelector} from "@/store";
 import {List, Typography} from "antd";
-import React, {ReactNode} from "react";
+import React, {ReactNode, useRef} from "react";
 import {USER_CENTER_KEY_TWO} from "@/page/user/Self/Self";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import {UserSelfRefreshJwtSecretSuf} from "@/api/none/UserSelfController";
-import {ModalForm, ProFormCaptcha, ProFormText} from "@ant-design/pro-components";
+import {ModalForm, ProFormCaptcha, ProFormInstance, ProFormText} from "@ant-design/pro-components";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
 import {
     NotBlankCodeDTO,
+    SignEmailBindAccountSendCode,
     SignEmailSignDelete,
     SignEmailSignDeleteSendCode,
+    SignEmailUpdateAccount,
+    SignEmailUpdateAccountDTO,
+    SignEmailUpdateAccountSendCode,
     SignEmailUpdatePassword,
     SignEmailUpdatePasswordDTO,
     SignEmailUpdatePasswordSendCode
@@ -34,7 +38,10 @@ interface IUserSelfSetting {
 
 // TODO：登录记录
 const RequestSelfLoginRecordModalTitle = "登录记录"
-const UpdateSignNameAccountModalTitle = "设置登录名"
+const SetSignNameAccountModalTitle = "设置登录名"
+const UpdateSignNameAccountModalTitle = "修改登录名"
+const SetEmailAccountModalTitle = "设置邮箱"
+const UpdateEmailAccountModalTitle = "修改邮箱"
 const UserSelfDeleteModalTitle = "账号注销"
 const UserSelfDeleteModalTargetName = "立即注销"
 const UserSelfUpdatePasswordTitle = "修改密码"
@@ -66,7 +73,9 @@ export default function () {
                 {
                     title: '邮箱',
                     description: userSelfInfo.email || '暂无',
-                    actions: []
+                    actions: [
+                        userSelfInfo.email ? <UpdateEmailAccountModalForm/> : <UpdateEmailAccountModalForm/>
+                    ]
                 },
                 {
                     title: '刷新令牌',
@@ -103,16 +112,92 @@ export default function () {
     )
 }
 
+// 修改邮箱：通过：邮箱验证码
+export function UpdateEmailAccountModalForm() {
+
+    const formRef = useRef<ProFormInstance<SignEmailUpdateAccountDTO>>();
+
+    return <ModalForm<SignEmailUpdateAccountDTO>
+        formRef={formRef}
+        modalProps={{
+            maskClosable: false
+        }}
+        isKeyPressSubmit
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={UpdateEmailAccountModalTitle}
+        trigger={<a>{UpdateEmailAccountModalTitle}</a>}
+        onFinish={async (form) => {
+            await SignEmailUpdateAccount(form).then(res => {
+                SignOut()
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormText
+            name="newEmail"
+            fieldProps={{
+                allowClear: true,
+            }}
+            required
+            label="新邮箱"
+            placeholder={'请输入新邮箱'}
+            rules={[
+                {
+                    validator: ValidatorUtil.emailValidate
+                }
+            ]}
+        />
+        <ProFormCaptcha
+            fieldProps={{
+                maxLength: 6,
+                allowClear: true,
+            }}
+            required
+            label="新邮箱验证码"
+            name="newEmailCode"
+            placeholder={"请输入新邮箱验证码"}
+            rules={[{validator: ValidatorUtil.codeValidate}]}
+            onGetCaptcha={async () => {
+                await formRef.current?.validateFields(['newEmail']).then(async res => {
+                    await SignEmailBindAccountSendCode({email: res.newEmail}).then(res => {
+                        ToastSuccess(res.msg)
+                    })
+                })
+            }}
+        />
+        <ProFormCaptcha
+            fieldProps={{
+                maxLength: 6,
+                allowClear: true,
+            }}
+            required
+            label="旧邮箱验证码"
+            name="oldEmailCode"
+            placeholder={"请输入旧邮箱验证码"}
+            rules={[{validator: ValidatorUtil.codeValidate}]}
+            onGetCaptcha={async () => {
+                await SignEmailUpdateAccountSendCode().then(res => {
+                    ToastSuccess(res.msg)
+                })
+            }}
+        />
+    </ModalForm>
+}
+
 // 设置登录名：通过：密码
 export function UpdateSignNameAccountModalForm() {
+
+    const userSelfInfo = useAppSelector((state) => state.user.userSelfInfo)
+
     return <ModalForm<SignSignInNameUpdateAccountDTO>
         modalProps={{
             maskClosable: false
         }}
         isKeyPressSubmit
         width={CommonConstant.MODAL_FORM_WIDTH}
-        title={UpdateSignNameAccountModalTitle}
-        trigger={<a>{UpdateSignNameAccountModalTitle}</a>}
+        title={userSelfInfo.signInName ? UpdateSignNameAccountModalTitle : SetSignNameAccountModalTitle}
+        trigger={<a>{userSelfInfo.signInName ? UpdateSignNameAccountModalTitle : SetSignNameAccountModalTitle}</a>}
         onFinish={async (form) => {
             form.currentPassword = PasswordRSAEncrypt(form.currentPassword)
             await SignSignInNameUpdateAccount(form).then(res => {
