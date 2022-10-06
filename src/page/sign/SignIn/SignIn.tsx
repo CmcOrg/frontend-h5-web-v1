@@ -1,14 +1,28 @@
 import {LockOutlined, UserOutlined,} from '@ant-design/icons';
-import {LoginForm, ProFormCheckbox, ProFormText,} from '@ant-design/pro-components';
+import {
+    LoginForm,
+    ModalForm,
+    ProFormCaptcha,
+    ProFormCheckbox,
+    ProFormInstance,
+    ProFormText,
+} from '@ant-design/pro-components';
 import {Tabs} from 'antd';
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import ViteSvg from '../../../../public/vite.svg'
 import SignLayout from "@/layout/SignLayout/SignLayout";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {SignInFormHandler} from "@/page/sign/SignIn/SignInUtil";
-import {InDev} from "@/util/CommonUtil";
 import {getAppNav} from "@/App";
 import PathConstant from "@/model/constant/PathConstant";
+import {
+    SignEmailForgotPassword,
+    SignEmailForgotPasswordDTO,
+    SignEmailForgotPasswordSendCode
+} from "@/api/sign/SignEmailController";
+import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
+import {ToastSuccess} from "@/util/ToastUtil";
+import {ValidatorUtil} from "@/util/ValidatorUtil";
 
 type TSignInType = 'account'; // 登录方式
 
@@ -79,11 +93,73 @@ export default function () {
                     <ProFormCheckbox noStyle>
                         记住我
                     </ProFormCheckbox>
-                    <a onClick={InDev}>
-                        忘记密码了
-                    </a>
+                    <UserForgotPasswordModalForm/>
                 </div>
             </LoginForm>
         </SignLayout>
     )
+}
+
+const userForgotPasswordModalTitle = "忘记密码了"
+
+export function UserForgotPasswordModalForm() {
+
+    const formRef = useRef<ProFormInstance<SignEmailForgotPasswordDTO>>();
+
+    return <ModalForm<SignEmailForgotPasswordDTO>
+        modalProps={{
+            maskClosable: false
+        }}
+        formRef={formRef}
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={userForgotPasswordModalTitle}
+        trigger={<a>{userForgotPasswordModalTitle}</a>}
+        onFinish={async (form) => {
+            const formTemp = {...form}
+            formTemp.origNewPassword = RSAEncrypt(formTemp.newPassword)
+            formTemp.newPassword = PasswordRSAEncrypt(formTemp.newPassword)
+            await SignEmailForgotPassword(formTemp).then(res => {
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormText
+            name="email"
+            fieldProps={{
+                allowClear: true,
+            }}
+            required
+            label="邮箱"
+            placeholder={'请输入邮箱'}
+            rules={[{validator: ValidatorUtil.emailValidate}]}
+        />
+        <ProFormCaptcha
+            fieldProps={{
+                maxLength: 6,
+                allowClear: true,
+            }}
+            required
+            label="验证码"
+            placeholder={'请输入验证码'}
+            name="code"
+            rules={[{validator: ValidatorUtil.codeValidate}]}
+            onGetCaptcha={async () => {
+                await formRef.current?.validateFields(['email']).then(async res => {
+                    await SignEmailForgotPasswordSendCode({email: res.email}).then(res => {
+                        ToastSuccess(res.msg)
+                    })
+                })
+            }}
+        />
+        <ProFormText
+            label="新密码"
+            placeholder={'请输入新密码'}
+            name="newPassword"
+            required
+            fieldProps={{
+                allowClear: true,
+            }}
+            rules={[{validator: ValidatorUtil.passwordValidate}]}/>
+    </ModalForm>
 }
