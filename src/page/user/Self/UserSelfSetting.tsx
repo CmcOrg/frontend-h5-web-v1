@@ -18,6 +18,8 @@ import {
 import {
     SignSignInNameSignDelete,
     SignSignInNameSignDeleteDTO,
+    SignSignInNameUpdateAccount,
+    SignSignInNameUpdateAccountDTO,
     SignSignInNameUpdatePassword,
     SignSignInNameUpdatePasswordDTO
 } from "@/api/sign/SignSignInNameController";
@@ -32,8 +34,7 @@ interface IUserSelfSetting {
 
 // TODO：登录记录
 const RequestSelfLoginRecordModalTitle = "登录记录"
-// TODO：设置登录名
-const UpdateAccountModalTitle = "设置登录名"
+const UpdateSignNameAccountModalTitle = "设置登录名"
 const UserSelfDeleteModalTitle = "账号注销"
 const UserSelfDeleteModalTargetName = "立即注销"
 const UserSelfUpdatePasswordTitle = "修改密码"
@@ -53,6 +54,13 @@ export default function () {
                     actions: [
                         userSelfInfo.email ? <UserSelfUpdatePasswordByCodeModalForm/> :
                             <UserSelfUpdatePasswordByPasswordModalForm/>
+                    ]
+                },
+                {
+                    title: '登录名',
+                    description: userSelfInfo.signInName || '暂无',
+                    actions: [
+                        <UpdateSignNameAccountModalForm/>
                     ]
                 },
                 {
@@ -93,6 +101,52 @@ export default function () {
             )}
         />
     )
+}
+
+// 设置登录名：通过：密码
+export function UpdateSignNameAccountModalForm() {
+    return <ModalForm<SignSignInNameUpdateAccountDTO>
+        modalProps={{
+            maskClosable: false
+        }}
+        isKeyPressSubmit
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={UpdateSignNameAccountModalTitle}
+        trigger={<a>{UpdateSignNameAccountModalTitle}</a>}
+        onFinish={async (form) => {
+            form.currentPassword = PasswordRSAEncrypt(form.currentPassword)
+            await SignSignInNameUpdateAccount(form).then(res => {
+                SignOut()
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormText
+            name="newSignInName"
+            fieldProps={{
+                allowClear: true,
+            }}
+            required
+            label="新登录名"
+            placeholder={'请输入新登录名'}
+            rules={[
+                {
+                    validator: ValidatorUtil.signInNameValidate
+                }
+            ]}
+        />
+        <ProFormText.Password
+            fieldProps={{
+                allowClear: true,
+            }}
+            label="当前密码"
+            name="currentPassword"
+            rules={[{
+                required: true,
+            }]}
+        />
+    </ModalForm>
 }
 
 // 用户修改密码：通过：旧密码
@@ -208,6 +262,7 @@ export function UserSelfDeleteByPasswordModalForm() {
                 fieldProps={{
                     allowClear: true,
                 }}
+                placeholder={'请输入当前密码'}
                 label="当前密码"
                 name="currentPassword"
                 rules={[{
@@ -246,7 +301,7 @@ export function UserSelfDeleteByCodeModalForm() {
                 required
                 label="验证码"
                 name="code"
-                placeholder={"请输入"}
+                placeholder={"请输入验证码"}
                 rules={[{validator: ValidatorUtil.codeValidate}]}
                 onGetCaptcha={async () => {
                     await SignEmailSignDeleteSendCode().then(res => {
