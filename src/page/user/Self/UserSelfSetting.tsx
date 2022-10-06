@@ -104,7 +104,7 @@ export function UserSelfUpdatePasswordByPasswordModalForm() {
         title={UserSelfUpdatePasswordTitle}
         trigger={<a>{UserSelfUpdatePasswordTitle}</a>}
         onFinish={async (form) => {
-            form.oldPassword = RSAEncrypt(form.oldPassword)
+            form.oldPassword = PasswordRSAEncrypt(form.oldPassword)
             form.origNewPassword = RSAEncrypt(form.newPassword)
             form.newPassword = PasswordRSAEncrypt(form.newPassword)
             await SignSignInNameUpdatePassword(form).then(res => {
