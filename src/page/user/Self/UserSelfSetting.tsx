@@ -4,6 +4,10 @@ import React, {ReactNode} from "react";
 import {USER_CENTER_KEY_TWO} from "@/page/user/Self/Self";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import {UserSelfRefreshJwtSecretSuf} from "@/api/none/UserSelfController";
+import {ModalForm, ProFormCaptcha} from "@ant-design/pro-components";
+import CommonConstant from "@/model/constant/CommonConstant";
+import {ValidatorUtil} from "@/util/ValidatorUtil";
+import {NotBlankCodeDTO, SignEmailSignDelete, SignEmailSignDeleteSendCode} from "@/api/sign/SignEmailController";
 
 interface IUserSelfSetting {
     title: string
@@ -40,7 +44,7 @@ export default function () {
                     title: '刷新令牌',
                     description: '刷新之后，执行任意操作，都会要求重新登录，用于：不修改密码，退出所有登录',
                     actions: [
-                        <a key="1" onClick={() => {
+                        <a onClick={() => {
                             ExecConfirm(() => {
                                 return UserSelfRefreshJwtSecretSuf().then(res => {
                                     ToastSuccess(res.msg)
@@ -54,7 +58,7 @@ export default function () {
                 {
                     title: UserSelfDeleteModalTitle,
                     actions: [
-                        <a key="1" className={"red3"}>{UserSelfDeleteModalTargetName}</a>
+                        <UserSelfDeleteModalForm/>
                     ]
                 },
             ]}
@@ -67,5 +71,44 @@ export default function () {
                 </List.Item>
             )}
         />
+    )
+}
+
+// 账号注销
+export function UserSelfDeleteModalForm() {
+
+    return (
+        <ModalForm<NotBlankCodeDTO>
+            modalProps={{
+                maskClosable: false
+            }}
+            isKeyPressSubmit
+            width={CommonConstant.MODAL_FORM_WIDTH}
+            title={UserSelfDeleteModalTitle}
+            trigger={<a className={"red3"}>{UserSelfDeleteModalTargetName}</a>}
+            onFinish={async (form) => {
+                await SignEmailSignDelete({code: form.code}).then(res => {
+                    ToastSuccess(res.msg)
+                })
+                return true
+            }}
+        >
+            <ProFormCaptcha
+                fieldProps={{
+                    maxLength: 6,
+                    allowClear: true,
+                }}
+                required
+                label="验证码"
+                placeholder={'请输入验证码'}
+                name="code"
+                rules={[{validator: ValidatorUtil.codeValidate}]}
+                onGetCaptcha={async () => {
+                    await SignEmailSignDeleteSendCode().then(res => {
+                        ToastSuccess(res.msg)
+                    })
+                }}
+            />
+        </ModalForm>
     )
 }

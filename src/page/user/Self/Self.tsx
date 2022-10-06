@@ -12,8 +12,8 @@ export const USER_CENTER_KEY_TWO = "账号设置"
 export default function () {
 
     const itemArr = [
-        {key: '1', label: <span><UserOutlined/>{USER_CENTER_KEY_ONE}</span>, children: <UserSelfInfo/>},
         {key: '2', label: <span><SettingOutlined/>{USER_CENTER_KEY_TWO}</span>, children: <UserSelfSetting/>},
+        {key: '1', label: <span><UserOutlined/>{USER_CENTER_KEY_ONE}</span>, children: <UserSelfInfo/>},
     ];
 
     return (
