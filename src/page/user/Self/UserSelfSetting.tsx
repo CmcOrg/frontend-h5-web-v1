@@ -4,10 +4,12 @@ import React, {ReactNode} from "react";
 import {USER_CENTER_KEY_TWO} from "@/page/user/Self/Self";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import {UserSelfRefreshJwtSecretSuf} from "@/api/none/UserSelfController";
-import {ModalForm, ProFormCaptcha} from "@ant-design/pro-components";
+import {ModalForm, ProFormCaptcha, ProFormText} from "@ant-design/pro-components";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
 import {NotBlankCodeDTO, SignEmailSignDelete, SignEmailSignDeleteSendCode} from "@/api/sign/SignEmailController";
+import {SignSignInNameSignDelete, SignSignInNameSignDeleteDTO} from "@/api/sign/SignSignInNameController";
+import {PasswordRSAEncrypt} from "@/util/RsaUtil";
 
 interface IUserSelfSetting {
     title: string
@@ -58,7 +60,7 @@ export default function () {
                 {
                     title: UserSelfDeleteModalTitle,
                     actions: [
-                        <UserSelfDeleteModalForm/>
+                        userSelfInfo.email ? <UserSelfDeleteByCodeModalForm/> : <UserSelfDeleteByPasswordModalForm/>
                     ]
                 },
             ]}
@@ -74,8 +76,42 @@ export default function () {
     )
 }
 
-// 账号注销
-export function UserSelfDeleteModalForm() {
+// 账号注销：通过：密码
+export function UserSelfDeleteByPasswordModalForm() {
+    return (
+        <ModalForm<SignSignInNameSignDeleteDTO>
+            modalProps={{
+                maskClosable: false
+            }}
+            isKeyPressSubmit
+            width={CommonConstant.MODAL_FORM_WIDTH}
+            title={UserSelfDeleteModalTitle}
+            trigger={<a className={"red3"}>{UserSelfDeleteModalTargetName}</a>}
+            onFinish={async (form) => {
+                console.log('currentPassword', form.currentPassword)
+                const currentPassword = PasswordRSAEncrypt(form.currentPassword)
+                await SignSignInNameSignDelete({currentPassword}).then(res => {
+                    ToastSuccess(res.msg)
+                })
+                return true
+            }}
+        >
+            <ProFormText.Password
+                fieldProps={{
+                    allowClear: true,
+                }}
+                label="当前密码"
+                name="currentPassword"
+                rules={[{
+                    required: true,
+                }]}
+            />
+        </ModalForm>
+    )
+}
+
+// 账号注销：通过：发送验证码
+export function UserSelfDeleteByCodeModalForm() {
 
     return (
         <ModalForm<NotBlankCodeDTO>
@@ -100,8 +136,8 @@ export function UserSelfDeleteModalForm() {
                 }}
                 required
                 label="验证码"
-                placeholder={'请输入验证码'}
                 name="code"
+                placeholder={"请输入"}
                 rules={[{validator: ValidatorUtil.codeValidate}]}
                 onGetCaptcha={async () => {
                     await SignEmailSignDeleteSendCode().then(res => {
