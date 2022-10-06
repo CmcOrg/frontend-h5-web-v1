@@ -16,7 +16,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysMenuInsertOrUpda
 
     {title: '路由', dataIndex: 'router', ellipsis: true,},
 
-    {title: '权限', dataIndex: 'auths', ellipsis: true,},
+    {title: '权限', dataIndex: 'auths', ellipsis: true, width: 50},
 
     {
         title: '权限菜单',

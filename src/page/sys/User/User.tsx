@@ -35,6 +35,7 @@ export default function () {
     return (
         <>
             <ProTable<SysUserPageVO, SysUserPageDTO>
+                scroll={{x: 'max-content'}}
                 sticky={{offsetHeader: CommonConstant.NAV_TOP_HEIGHT}}
                 actionRef={actionRef}
                 rowKey={"id"}

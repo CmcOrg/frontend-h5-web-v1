@@ -38,6 +38,7 @@ export default function () {
     return (
         <>
             <ProTable<SysDictDO, SysDictPageDTO>
+                scroll={{x: 'max-content'}}
                 sticky={{offsetHeader: CommonConstant.NAV_TOP_HEIGHT}}
                 actionRef={actionRef}
                 rowKey={"id"}
