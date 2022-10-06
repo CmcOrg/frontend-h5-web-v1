@@ -2,6 +2,8 @@ import {YesNoDict} from "@/util/DictUtil";
 import {ActionType, ProColumns} from "@ant-design/pro-components";
 import {SysUserDeleteByIdSet, SysUserInsertOrUpdateDTO, SysUserPageVO} from "@/api/admin/SysUserController";
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
+import CommonConstant from "@/model/constant/CommonConstant";
+import {EyeOutlined} from "@ant-design/icons/lib";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysUserPageVO>[] => [
     {
@@ -10,11 +12,19 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
         valueType: 'index',
     },
 
-    {title: '主键id', dataIndex: 'id', ellipsis: true,},
+    {
+        title: '头像', dataIndex: 'avatarUri', valueType: 'image',
+        fieldProps: {
+            preview: {
+                mask: <EyeOutlined title={"预览"}/>
+            }
+        },
+        renderText: (text) => {
+            return text || CommonConstant.FIXED_AVATAR_URL
+        }
+    },
 
     {title: '昵称', dataIndex: 'nickname', ellipsis: true,},
-
-    {title: '头像uri', dataIndex: 'avatarUri', ellipsis: true, width: 70,},
 
     {title: '邮箱', dataIndex: 'email', ellipsis: true, width: 50,},
 

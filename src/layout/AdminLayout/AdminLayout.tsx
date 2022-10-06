@@ -210,7 +210,7 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                                 }}>
                                     <Space>
                                         <Avatar size="small"
-                                                src={"https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"}/>
+                                                src={userSelfInfo.avatarUri || CommonConstant.FIXED_AVATAR_URL}/>
                                         <Typography.Text ellipsis style={{width: 35}}
                                                          type="secondary">{userSelfInfo.nickname}</Typography.Text>
                                     </Space>
