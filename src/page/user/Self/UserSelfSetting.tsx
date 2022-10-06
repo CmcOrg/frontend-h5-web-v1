@@ -9,6 +9,8 @@ import CommonConstant from "@/model/constant/CommonConstant";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
 import {
     NotBlankCodeDTO,
+    SignEmailBindAccount,
+    SignEmailBindAccountDTO,
     SignEmailBindAccountSendCode,
     SignEmailSignDelete,
     SignEmailSignDeleteSendCode,
@@ -74,7 +76,7 @@ export default function () {
                     title: '邮箱',
                     description: userSelfInfo.email || '暂无',
                     actions: [
-                        userSelfInfo.email ? <UpdateEmailAccountModalForm/> : <UpdateEmailAccountModalForm/>
+                        userSelfInfo.email ? <UpdateEmailAccountModalForm/> : <SetEmailAccountModalForm/>
                     ]
                 },
                 {
@@ -110,6 +112,63 @@ export default function () {
             )}
         />
     )
+}
+
+// 设置邮箱：通过：邮箱验证码
+export function SetEmailAccountModalForm() {
+
+    const formRef = useRef<ProFormInstance<SignEmailBindAccountDTO>>();
+
+    return <ModalForm<SignEmailBindAccountDTO>
+        formRef={formRef}
+        modalProps={{
+            maskClosable: false
+        }}
+        isKeyPressSubmit
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={SetEmailAccountModalTitle}
+        trigger={<a>{SetEmailAccountModalTitle}</a>}
+        onFinish={async (form) => {
+            await SignEmailBindAccount(form).then(res => {
+                SignOut()
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormText
+            name="email"
+            fieldProps={{
+                allowClear: true,
+            }}
+            required
+            label="邮箱"
+            placeholder={'请输入邮箱'}
+            rules={[
+                {
+                    validator: ValidatorUtil.emailValidate
+                }
+            ]}
+        />
+        <ProFormCaptcha
+            fieldProps={{
+                maxLength: 6,
+                allowClear: true,
+            }}
+            required
+            label="验证码"
+            name="code"
+            placeholder={"请输入验证码"}
+            rules={[{validator: ValidatorUtil.codeValidate}]}
+            onGetCaptcha={async () => {
+                await formRef.current?.validateFields(['email']).then(async res => {
+                    await SignEmailBindAccountSendCode({email: res.email}).then(res => {
+                        ToastSuccess(res.msg)
+                    })
+                })
+            }}
+        />
+    </ModalForm>
 }
 
 // 修改邮箱：通过：邮箱验证码
