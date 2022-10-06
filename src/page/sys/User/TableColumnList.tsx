@@ -29,7 +29,8 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
     {
         title: '是否有密码',
         dataIndex: 'passwordFlag',
-        valueEnum: YesNoDict
+        valueEnum: YesNoDict,
+        width: 100,
     },
 
     {

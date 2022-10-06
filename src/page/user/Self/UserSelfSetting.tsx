@@ -7,9 +7,16 @@ import {UserSelfRefreshJwtSecretSuf} from "@/api/none/UserSelfController";
 import {ModalForm, ProFormCaptcha, ProFormText} from "@ant-design/pro-components";
 import CommonConstant from "@/model/constant/CommonConstant";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
-import {NotBlankCodeDTO, SignEmailSignDelete, SignEmailSignDeleteSendCode} from "@/api/sign/SignEmailController";
+import {
+    NotBlankCodeDTO,
+    SignEmailSignDelete,
+    SignEmailSignDeleteSendCode,
+    SignEmailUpdatePassword,
+    SignEmailUpdatePasswordDTO,
+    SignEmailUpdatePasswordSendCode
+} from "@/api/sign/SignEmailController";
 import {SignSignInNameSignDelete, SignSignInNameSignDeleteDTO} from "@/api/sign/SignSignInNameController";
-import {PasswordRSAEncrypt} from "@/util/RsaUtil";
+import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
 import {SignOut} from "@/util/UserUtil";
 
 interface IUserSelfSetting {
@@ -36,11 +43,13 @@ export default function () {
             dataSource={[
                 {
                     title: '密码',
-                    actions: []
+                    actions: [
+                        <UserSelfUpdatePasswordForCodeModalForm/>
+                    ]
                 },
                 {
                     title: '邮箱',
-                    description: userSelfInfo.email,
+                    description: userSelfInfo.email || '暂无',
                     actions: []
                 },
                 {
@@ -60,6 +69,7 @@ export default function () {
                 },
                 {
                     title: UserSelfDeleteModalTitle,
+                    description: userSelfInfo.createTime ? ('注册时间：' + userSelfInfo.createTime) : undefined,
                     actions: [
                         userSelfInfo.email ? <UserSelfDeleteByCodeModalForm/> : <UserSelfDeleteByPasswordModalForm/>
                     ]
@@ -75,6 +85,54 @@ export default function () {
             )}
         />
     )
+}
+
+// 用户修改密码：通过：发送验证码
+export function UserSelfUpdatePasswordForCodeModalForm() {
+    return <ModalForm<SignEmailUpdatePasswordDTO>
+        modalProps={{
+            maskClosable: false
+        }}
+        isKeyPressSubmit
+        width={CommonConstant.MODAL_FORM_WIDTH}
+        title={UserSelfUpdatePasswordTitle}
+        trigger={<a>{UserSelfUpdatePasswordTitle}</a>}
+        onFinish={async (form) => {
+            form.origNewPassword = RSAEncrypt(form.newPassword)
+            form.newPassword = PasswordRSAEncrypt(form.newPassword)
+            await SignEmailUpdatePassword(form).then(res => {
+                SignOut()
+                ToastSuccess(res.msg)
+            })
+            return true
+        }}
+    >
+        <ProFormCaptcha
+            fieldProps={{
+                maxLength: 6,
+                allowClear: true,
+            }}
+            required
+            label="验证码"
+            placeholder={'请输入验证码'}
+            name="code"
+            rules={[{validator: ValidatorUtil.codeValidate}]}
+            onGetCaptcha={async () => {
+                await SignEmailUpdatePasswordSendCode().then(res => {
+                    ToastSuccess(res.msg)
+                })
+            }}
+        />
+        <ProFormText
+            label="新密码"
+            placeholder={'请输入新密码'}
+            name="newPassword"
+            required
+            fieldProps={{
+                allowClear: true,
+            }}
+            rules={[{validator: ValidatorUtil.passwordValidate}]}/>
+    </ModalForm>
 }
 
 // 账号注销：通过：密码
