@@ -16,7 +16,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpda
         title: '头像', dataIndex: 'avatarUri', valueType: 'image',
         fieldProps: {
             preview: {
-                mask: <EyeOutlined title={"预览"}/>
+                mask: <EyeOutlined title={"预览"}/>,
             }
         },
         renderText: (text) => {
