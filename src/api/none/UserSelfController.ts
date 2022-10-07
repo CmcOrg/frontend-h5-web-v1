@@ -13,12 +13,12 @@ export interface UserSelfInfoVO {
 
 // 获取：当前用户，基本信息
 export function UserSelfInfo(config?: AxiosRequestConfig) {
-    return $http.myPost<UserSelfInfoVO>('/userSelf/info', undefined, config)
+    return $http.myPost<UserSelfInfoVO>('/user/self/info', undefined, config)
 }
 
 // 当前用户：刷新jwt私钥后缀
 export function UserSelfRefreshJwtSecretSuf(config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/userSelf/refreshJwtSecretSuf', undefined, config)
+    return $http.myPost<string>('/user/self/refreshJwtSecretSuf', undefined, config)
 }
 
 export interface UserSelfUpdateInfoDTO {
@@ -29,5 +29,5 @@ export interface UserSelfUpdateInfoDTO {
 
 // 当前用户：基本信息：修改
 export function UserSelfUpdateInfo(form: UserSelfUpdateInfoDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/userSelf/updateInfo', form, config)
+    return $http.myPost<string>('/user/self/updateInfo', form, config)
 }

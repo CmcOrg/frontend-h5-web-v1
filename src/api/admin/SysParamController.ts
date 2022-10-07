@@ -9,7 +9,7 @@ export interface NotEmptyIdSet {
 
 // 批量删除
 export function SysParamDeleteByIdSet(form: NotEmptyIdSet, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysParam/deleteByIdSet', form, config)
+    return $http.myPost<string>('/sys/param/deleteByIdSet', form, config)
 }
 
 export interface NotNullId {
@@ -32,7 +32,7 @@ export interface SysParamDO {
 
 // 通过主键id，查看详情
 export function SysParamInfoById(form: NotNullId, config?: AxiosRequestConfig) {
-    return $http.myProPost<SysParamDO>('/sysParam/infoById', form, config)
+    return $http.myProPost<SysParamDO>('/sys/param/infoById', form, config)
 }
 
 export interface SysParamInsertOrUpdateDTO {
@@ -45,7 +45,7 @@ export interface SysParamInsertOrUpdateDTO {
 
 // 新增/修改
 export function SysParamInsertOrUpdate(form: SysParamInsertOrUpdateDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysParam/insertOrUpdate', form, config)
+    return $http.myPost<string>('/sys/param/insertOrUpdate', form, config)
 }
 
 export interface SysParamPageDTO {
@@ -60,5 +60,5 @@ export interface SysParamPageDTO {
 
 // 分页排序查询
 export function SysParamPage(form: SysParamPageDTO, config?: AxiosRequestConfig) {
-    return $http.myProPagePost<SysParamDO>('/sysParam/page', form, config)
+    return $http.myProPagePost<SysParamDO>('/sys/param/page', form, config)
 }

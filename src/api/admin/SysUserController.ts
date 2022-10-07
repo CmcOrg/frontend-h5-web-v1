@@ -9,7 +9,7 @@ export interface NotEmptyIdSet {
 
 // 批量：注销用户
 export function SysUserDeleteByIdSet(form: NotEmptyIdSet, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysUser/deleteByIdSet', form, config)
+    return $http.myPost<string>('/sys/user/deleteByIdSet', form, config)
 }
 
 export interface SysUserDictListDTO {
@@ -23,7 +23,7 @@ export interface DictResultVO {
 
 // 下拉列表
 export function SysUserDictList(form: SysUserDictListDTO, config?: AxiosRequestConfig) {
-    return $http.myProPagePost<DictResultVO>('/sysUser/dictList', form, config)
+    return $http.myProPagePost<DictResultVO>('/sys/user/dictList', form, config)
 }
 
 export interface NotNullId {
@@ -53,7 +53,7 @@ export interface SysUserInfoByIdVO {
 
 // 通过主键id，查看详情
 export function SysUserInfoById(form: NotNullId, config?: AxiosRequestConfig) {
-    return $http.myProPost<SysUserInfoByIdVO>('/sysUser/infoById', form, config)
+    return $http.myProPost<SysUserInfoByIdVO>('/sys/user/infoById', form, config)
 }
 
 export interface SysUserInsertOrUpdateDTO {
@@ -71,11 +71,14 @@ export interface SysUserInsertOrUpdateDTO {
 
 // 新增/修改
 export function SysUserInsertOrUpdate(form: SysUserInsertOrUpdateDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysUser/insertOrUpdate', form, config)
+    return $http.myPost<string>('/sys/user/insertOrUpdate', form, config)
 }
 
 export interface SysUserPageDTO {
+    id?: number // 主键 id
     nickname?: string // 昵称
+    avatarUri?: string // 头像uri
+    signInName?: string // 登录名
     email?: string // 邮箱
     enableFlag?: boolean // 是否正常
     passwordFlag?: boolean // 是否有密码
@@ -100,17 +103,17 @@ export interface SysUserPageVO {
 
 // 分页排序查询
 export function SysUserPage(form: SysUserPageDTO, config?: AxiosRequestConfig) {
-    return $http.myProPagePost<SysUserPageVO>('/sysUser/page', form, config)
+    return $http.myProPagePost<SysUserPageVO>('/sys/user/page', form, config)
 }
 
 // 批量：刷新用户 jwt私钥后缀
 export function SysUserRefreshJwtSecretSuf(form: NotEmptyIdSet, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysUser/refreshJwtSecretSuf', form, config)
+    return $http.myPost<string>('/sys/user/refreshJwtSecretSuf', form, config)
 }
 
 // 批量：重置头像
 export function SysUserResetAvatar(form: NotEmptyIdSet, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysUser/resetAvatar', form, config)
+    return $http.myPost<string>('/sys/user/resetAvatar', form, config)
 }
 
 export interface SysUserUpdatePasswordDTO {
@@ -121,5 +124,5 @@ export interface SysUserUpdatePasswordDTO {
 
 // 批量：修改密码
 export function SysUserUpdatePassword(form: SysUserUpdatePasswordDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysUser/updatePassword', form, config)
+    return $http.myPost<string>('/sys/user/updatePassword', form, config)
 }

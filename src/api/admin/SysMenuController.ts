@@ -10,7 +10,7 @@ export interface AddOrderNoDTO {
 
 // 通过主键 idSet，加减排序号
 export function SysMenuAddOrderNo(form: AddOrderNoDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysMenu/addOrderNo', form, config)
+    return $http.myPost<string>('/sys/menu/addOrderNo', form, config)
 }
 
 export interface NotEmptyIdSet {
@@ -19,7 +19,7 @@ export interface NotEmptyIdSet {
 
 // 批量删除
 export function SysMenuDeleteByIdSet(form: NotEmptyIdSet, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysMenu/deleteByIdSet', form, config)
+    return $http.myPost<string>('/sys/menu/deleteByIdSet', form, config)
 }
 
 export interface NotNullId {
@@ -54,7 +54,7 @@ export interface SysMenuInfoByIdVO {
 
 // 通过主键id，查看详情
 export function SysMenuInfoById(form: NotNullId, config?: AxiosRequestConfig) {
-    return $http.myProPost<SysMenuInfoByIdVO>('/sysMenu/infoById', form, config)
+    return $http.myProPost<SysMenuInfoByIdVO>('/sys/menu/infoById', form, config)
 }
 
 export interface SysMenuInsertOrUpdateDTO {
@@ -77,7 +77,7 @@ export interface SysMenuInsertOrUpdateDTO {
 
 // 新增/修改
 export function SysMenuInsertOrUpdate(form: SysMenuInsertOrUpdateDTO, config?: AxiosRequestConfig) {
-    return $http.myPost<string>('/sysMenu/insertOrUpdate', form, config)
+    return $http.myPost<string>('/sys/menu/insertOrUpdate', form, config)
 }
 
 export interface SysMenuPageDTO {
@@ -125,15 +125,15 @@ export interface SysMenuDO {
 
 // 分页排序查询
 export function SysMenuPage(form: SysMenuPageDTO, config?: AxiosRequestConfig) {
-    return $http.myProPagePost<SysMenuDO>('/sysMenu/page', form, config)
+    return $http.myProPagePost<SysMenuDO>('/sys/menu/page', form, config)
 }
 
 // 查询：树结构
 export function SysMenuTree(form: SysMenuPageDTO, config?: AxiosRequestConfig) {
-    return $http.myProTreePost<SysMenuDO>('/sysMenu/tree', form, config)
+    return $http.myProTreePost<SysMenuDO>('/sys/menu/tree', form, config)
 }
 
 // 获取：当前用户绑定的菜单
 export function SysMenuUserSelfMenuList(config?: AxiosRequestConfig) {
-    return $http.myProTreePost<SysMenuDO>('/sysMenu/userSelfMenuList', undefined, config)
+    return $http.myProTreePost<SysMenuDO>('/sys/menu/userSelfMenuList', undefined, config)
 }
