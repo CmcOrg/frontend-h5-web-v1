@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "game-dev": "vite --host",
+    "game-build": "tsc && vite build",
+    "game-preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
