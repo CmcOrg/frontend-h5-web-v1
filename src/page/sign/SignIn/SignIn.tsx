@@ -35,7 +35,7 @@ export interface ISignInForm {
 export default function () {
     const [signInType, setSignInType] = useState<TSignInType>('account');
     return (
-        <SignLayout className={"Geek-Blue"}>
+        <SignLayout className={"Theme-Geek-Blue"}>
             <LoginForm<ISignInForm>
                 logo={ViteSvg}
                 title={CommonConstant.SYS_NAME}
