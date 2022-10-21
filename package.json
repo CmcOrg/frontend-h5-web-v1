@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "web-dev": "vite --host",
-    "web-build": "tsc && vite build",
-    "web-preview": "vite preview"
+    "frontend-h5-web-v1-dev": "vite --host",
+    "frontend-h5-web-v1-build": "tsc && vite build",
+    "frontend-h5-web-v1-preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
