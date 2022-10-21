@@ -9,7 +9,7 @@ interface IUserSlice {
 }
 
 const initialState: IUserSlice = {
-    userSelfMenuList: [] as SysMenuDO[],
+    userSelfMenuList: [],
     userSelfInfo: JSON.parse(
         localStorage.getItem(LocalStorageKey.USER_SELF_INFO) || '{}'
     ),
