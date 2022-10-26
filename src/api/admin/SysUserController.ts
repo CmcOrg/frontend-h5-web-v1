@@ -42,6 +42,7 @@ export interface SysUserInfoByIdVO {
     email?: string // 邮箱，可以为空
     signInName?: string // 登录名，可以为空
     phone?: string // 手机号，可以为空
+    tenantId?: number // 租户主键 id
     id?: number // 主键id
     createId?: number // 创建人id
     createTime?: string // 创建时间
