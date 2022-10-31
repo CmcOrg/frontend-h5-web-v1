@@ -206,3 +206,18 @@
 }
 
 .fw(550);
+
+.space(@i, @max, @step) when (@i <= @max) {
+
+  .space-l-@{i} + .space-l-@{i} {
+    margin-left: @i + 0px !important;
+  }
+
+  .space-t-@{i} + .space-t-@{i} {
+    margin-top: @i + 0px !important;
+  }
+
+  .space(@i: (@i + @step), @max:@max, @step:@step);
+}
+
+.space(0, 100, 1);
