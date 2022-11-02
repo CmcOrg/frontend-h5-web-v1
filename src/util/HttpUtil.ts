@@ -7,6 +7,7 @@ import {RequestData} from '@ant-design/pro-components';
 
 export const TIMEOUT_MSG = '请求超时，请重试'
 export const BASE_ERROR_MSG = "请求错误："
+export const REQUEST_ERROR_MSG = "请求失败：服务器未启动"
 
 let hiddenErrorMsgFlag = false
 
@@ -67,7 +68,7 @@ $http.interceptors.response.use(
                 ToastError(res.msg, 5)
             } else {
                 if (!hiddenErrorMsg) {
-                    ToastError(res.msg, 5)
+                    ToastError(res.msg || REQUEST_ERROR_MSG, 5)
                 }
             }
             return Promise.reject(res) // 这里会 触发 catch
