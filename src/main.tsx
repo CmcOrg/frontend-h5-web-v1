@@ -21,7 +21,7 @@ moment.locale('zh-cn');
 const consoleOldError = console.error
 
 console.error = (message?: any, ...optionalParams: any[]) => {
-    if (message === 'Warning: routes 将会废弃，为了保证兼容请使用 children 作为子节点定义方式') {
+    if (message === 'Warning: [antd: Dropdown] `overlay` is deprecated. Please use `menu` instead.') {
         return // TODO：等 antd pro官方修复，然后删除
     }
     consoleOldError(message, ...optionalParams)
@@ -29,7 +29,8 @@ console.error = (message?: any, ...optionalParams: any[]) => {
 // 自定义 console.error ↑
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    // <React.StrictMode> // TODO：暂时会报错，等 antd pro官方修复
+    // TODO：暂时会报错，等 antd pro官方修复
+    // <React.StrictMode>
     <Provider store={store}>
         <ConfigProvider locale={zhCN}>
             <App/>
