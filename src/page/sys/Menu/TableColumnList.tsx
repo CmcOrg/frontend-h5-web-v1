@@ -4,10 +4,12 @@ import {SysMenuDeleteByIdSet, SysMenuDO, SysMenuInsertOrUpdateDTO} from "@/api/a
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysMenuInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysMenuDO>[] => [
+
     {
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
+        width: 50,
     },
 
     {title: '菜单名', dataIndex: 'name', ellipsis: true,},

@@ -4,10 +4,12 @@ import {SysDictDeleteByIdSet, SysDictDO, SysDictInsertOrUpdateDTO} from "@/api/a
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysDictInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysDictDO>[] => [
+
     {
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
+        width: 50,
     },
 
     {title: 'key', dataIndex: 'dictKey', ellipsis: true,},

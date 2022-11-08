@@ -4,10 +4,12 @@ import {SysRoleDeleteByIdSet, SysRoleDO, SysRoleInsertOrUpdateDTO} from "@/api/a
 import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysRoleInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysRoleDO>[] => [
+
     {
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
+        width: 50,
     },
 
     {title: '角色名', dataIndex: 'name', ellipsis: true,},

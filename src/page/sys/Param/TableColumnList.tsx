@@ -5,10 +5,12 @@ import {ExecConfirm, ToastSuccess} from "@/util/ToastUtil";
 import {Typography} from "antd";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysParamInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysParamDO>[] => [
+
     {
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
+        width: 50,
     },
 
     {title: '配置名', dataIndex: 'name', ellipsis: true,},

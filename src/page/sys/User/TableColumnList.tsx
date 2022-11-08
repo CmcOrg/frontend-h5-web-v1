@@ -6,10 +6,12 @@ import CommonConstant from "@/model/constant/CommonConstant";
 import {EyeOutlined} from "@ant-design/icons/lib";
 
 const TableColumnList = (currentForm: React.MutableRefObject<SysUserInsertOrUpdateDTO | null>, setFormVisible: React.Dispatch<React.SetStateAction<boolean>>, actionRef: React.RefObject<ActionType>): ProColumns<SysUserPageVO>[] => [
+
     {
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
+        width: 50,
     },
 
     {
