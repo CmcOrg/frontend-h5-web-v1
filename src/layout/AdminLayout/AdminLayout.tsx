@@ -24,7 +24,7 @@ import MyIcon from "@/componse/MyIcon/MyIcon";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons/lib";
 import {GetBeiAnHref, GetBeiAnNumber, GetCopyright} from "@/layout/SignLayout/SignLayout";
 import {SignOutSelf} from "@/api/none/SignOutController";
-import {Avatar, Button, Dropdown, Menu, Space, Typography} from "antd";
+import {Avatar, Button, Dropdown, Space, Typography} from "antd";
 import {UserSelfInfo} from "@/api/none/UserSelfController";
 
 // 前往：第一个页面
@@ -172,36 +172,38 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
                 <RouteContext.Consumer>
                     {(routeContextType: RouteContextType) => {
                         return <Space size={"large"}>
-                            <Dropdown overlay={<Menu items={[
-                                {
-                                    key: '1',
-                                    label: <a onClick={() => {
-                                        setPathname(PathConstant.USER_SELF_PATH)
-                                        getAppNav()(PathConstant.USER_SELF_PATH)
-                                    }
-                                    }>
-                                        个人中心
-                                    </a>,
-                                    icon: <UserOutlined/>
-                                },
-                                {
-                                    key: '2',
-                                    danger: true,
-                                    label: <a
-                                        onClick={() => {
-                                            ExecConfirm(() => {
-                                                return SignOutSelf().then((res) => {
-                                                    ToastSuccess(res.msg)
-                                                    SignOut()
-                                                })
-                                            }, undefined, "确定退出登录吗？")
-                                        }}
-                                    >
-                                        退出登录
-                                    </a>,
-                                    icon: <LogoutOutlined/>
-                                },
-                            ]}/>}>
+                            <Dropdown menu={{
+                                items: [
+                                    {
+                                        key: '1',
+                                        label: <a onClick={() => {
+                                            setPathname(PathConstant.USER_SELF_PATH)
+                                            getAppNav()(PathConstant.USER_SELF_PATH)
+                                        }
+                                        }>
+                                            个人中心
+                                        </a>,
+                                        icon: <UserOutlined/>
+                                    },
+                                    {
+                                        key: '2',
+                                        danger: true,
+                                        label: <a
+                                            onClick={() => {
+                                                ExecConfirm(() => {
+                                                    return SignOutSelf().then((res) => {
+                                                        ToastSuccess(res.msg)
+                                                        SignOut()
+                                                    })
+                                                }, undefined, "确定退出登录吗？")
+                                            }}
+                                        >
+                                            退出登录
+                                        </a>,
+                                        icon: <LogoutOutlined/>
+                                    },
+                                ]
+                            }}>
                                 <Button type="text" onClick={() => {
                                     if (!routeContextType.isMobile) {
                                         setPathname(PathConstant.USER_SELF_PATH)
