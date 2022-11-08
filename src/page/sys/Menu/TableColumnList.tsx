@@ -9,7 +9,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysMenuInsertOrUpda
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
-        width: 50,
+        width: 90,
     },
 
     {title: '菜单名', dataIndex: 'name', ellipsis: true,},

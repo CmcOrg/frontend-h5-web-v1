@@ -9,7 +9,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysDictInsertOrUpda
         title: '序号',
         dataIndex: 'index',
         valueType: 'index',
-        width: 50,
+        width: 90,
     },
 
     {title: 'key', dataIndex: 'dictKey', ellipsis: true,},
