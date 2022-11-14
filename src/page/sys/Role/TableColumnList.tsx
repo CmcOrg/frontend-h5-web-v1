@@ -40,7 +40,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysRoleInsertOrUpda
         valueEnum: YesNoDict
     },
 
-    {title: '备注', dataIndex: 'remark', ellipsis: true,},
+    {title: '备注', dataIndex: 'remark', ellipsis: true, width: 90,},
 
     {
         title: '操作',

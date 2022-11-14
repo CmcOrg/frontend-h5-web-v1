@@ -16,7 +16,7 @@ const TableColumnList = (currentForm: React.MutableRefObject<SysDictInsertOrUpda
 
     {title: '名称', dataIndex: 'name', ellipsis: true,},
 
-    {title: 'value', dataIndex: 'value', ellipsis: true,},
+    {title: 'value', dataIndex: 'value', ellipsis: true, width: 90,},
 
     {title: '排序号', dataIndex: 'orderNo', ellipsis: true, hideInSearch: true,},
 
