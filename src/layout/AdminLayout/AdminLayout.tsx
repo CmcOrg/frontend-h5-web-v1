@@ -22,7 +22,7 @@ import {setUserSelfInfo, setUserSelfMenuList} from "@/store/userSlice";
 import {ListToTree} from "@/util/TreeUtil";
 import MyIcon from "@/componse/MyIcon/MyIcon";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons/lib";
-import {GetBeiAnHref, GetBeiAnNumber, GetCopyright} from "@/layout/SignLayout/SignLayout";
+import {GetCopyright} from "@/layout/SignLayout/SignLayout";
 import {SignOutSelf} from "@/api/none/SignOutController";
 import {Avatar, Button, Dropdown, Space, Typography} from "antd";
 import {UserSelfInfo} from "@/api/none/UserSelfController";
@@ -204,9 +204,6 @@ function AdminLayoutElement(props: IAdminLayoutElement) {
             )}
             footerRender={() => (
                 <DefaultFooter
-                    links={[
-                        {key: GetBeiAnNumber(), title: GetBeiAnNumber(), href: GetBeiAnHref(), blankTarget: true},
-                    ]}
                     copyright={GetCopyright()}
                 />
             )}

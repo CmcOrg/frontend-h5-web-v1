@@ -13,14 +13,6 @@ export function GetCopyright() {
     return `2021-${new Date().getFullYear()} Cmc Org. All Rights Reserved.`
 }
 
-export function GetBeiAnHref() {
-    return `https://beian.miit.gov.cn`
-}
-
-export function GetBeiAnNumber() {
-    return "渝ICP备2022000851号-1"
-}
-
 // 登录注册页面布局
 export default function (props: ISignLayout) {
 
@@ -42,13 +34,6 @@ export default function (props: ISignLayout) {
                     <div className={"m-r-10"}>
                         <CopyrightOutlined/> {GetCopyright()}
                     </div>
-                    <a
-                        href={GetBeiAnHref()}
-                        target={"_blank"}
-                        title={GetBeiAnNumber()}
-                    >
-                        渝ICP备2022000851号-1
-                    </a>
                 </div>
             </>
         </div>
