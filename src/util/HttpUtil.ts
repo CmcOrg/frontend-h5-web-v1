@@ -101,6 +101,7 @@ export interface ApiResultVO<T = string> {
     successFlag: boolean
     msg: string
     data: T
+    service: string
 }
 
 interface MyAxiosInstance extends AxiosInstance {
