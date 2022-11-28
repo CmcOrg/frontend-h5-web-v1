@@ -1,4 +1,5 @@
-import {PageHeader} from "antd";
+import {PageHeader} from "@ant-design/pro-components";
+import React from "react";
 
 // 系统平台-欢迎页
 export default function () {
