@@ -9,6 +9,7 @@ export interface UserSelfInfoVO {
     passwordFlag?: boolean // 是否有密码，用于前端显示，修改密码/设置密码
     signInName?: string // 登录名，会脱敏
     phone?: string // 手机号码，会脱敏
+    wxOpenId?: string // 微信 openId，会脱敏
     createTime?: string // 账号注册时间
 }
 
