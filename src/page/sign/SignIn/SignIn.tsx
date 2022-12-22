@@ -23,6 +23,7 @@ import {
 import {PasswordRSAEncrypt, RSAEncrypt} from "@/util/RsaUtil";
 import {ToastSuccess} from "@/util/ToastUtil";
 import {ValidatorUtil} from "@/util/ValidatorUtil";
+import Link from 'antd/es/typography/Link';
 
 type TSignInType = 'account'; // 登录方式
 
@@ -41,7 +42,7 @@ export default function () {
                 title={CommonConstant.SYS_NAME}
                 subTitle="Will have the most powerful !"
                 actions={
-                    <div>或者 <a title={"注册"} onClick={() => getAppNav()(PathConstant.SIGN_UP_PATH)}>注册</a>
+                    <div>或者 <Link title={"注册"} onClick={() => getAppNav()(PathConstant.SIGN_UP_PATH)}>注册</Link>
                     </div>
                 }
                 onFinish={async (form) => {
